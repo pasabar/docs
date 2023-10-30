@@ -11,7 +11,7 @@ info:
     url: https://pkg.go.dev/github.com/pasabar/pasetobackendpasabar
   version: 1.0.1
 externalDocs:
-  description: Repo GCF
+  description: Repo backend
   url: https://pasabar.github.io/pasetobackendpasabar/
 servers:
   - url: https://us-central1-pasabar.cloudfunctions.net/pasabar
