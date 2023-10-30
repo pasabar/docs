@@ -25,7 +25,7 @@ tags:
     description: Auth to Access to API
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://pasabar.github.io/pasetobackendpasabar/
+      url: https://pasabar.github.io/pasetobackendpasabar/signuprole
 paths:
   user:
     get:
