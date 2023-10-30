@@ -20,12 +20,12 @@ tags:
     description: Data User
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://pasabar.github.io/pasetobackendpasabarup
+      url: https://pasabar.github.io/pasetobackendpasabar/
   - name: Auth
     description: Auth to Access to API
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://pasabar.github.io/pasetobackendpasabar/signuprole
+      url: https://pasabar.github.io/pasetobackendpasabar/
 paths:
   user:
     get:
