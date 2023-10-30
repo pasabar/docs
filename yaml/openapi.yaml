@@ -17,7 +17,7 @@ servers:
   - url: https://us-central1-pasabar.cloudfunctions.net/pasabar
 tags:
   - name: User
-    description: Data User
+    description: Data Userpasabar
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://pasabar.github.io/pasetobackendpasabar/login
@@ -31,7 +31,7 @@ paths:
     get:
       tags:
         - User
-      summary: Get user
+      summary: Get userpasabar
       description: List Data User
       operationId: getUserJSON
       responses:
