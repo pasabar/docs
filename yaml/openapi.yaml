@@ -101,7 +101,7 @@ components:
           example: true
         message:
           type: string
-          example: selamat datang pasabar
+          example: selamat datang
         token:
           type: string
           example: token
