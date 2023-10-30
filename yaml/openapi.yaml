@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Dokumen API Cloud Function - OpenAPI 3.0
+  title: Dokumen API Cloud Function Pasabar - OpenAPI 3.0
   description: >-
     Dokumen API Cloud Function Aplikasi Pariwisata Jawa Barat
   termsOfService: https://github.com/pasabar/docs
