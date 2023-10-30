@@ -27,11 +27,11 @@ tags:
       description: Deskripsi dan Kode Program
       url: https://pasabar.github.io/pasetobackendpasabar/
 paths:
-  /intermoni-user:
+  user:
     get:
       tags:
         - User
-      summary: Get All User
+      summary: Get user
       description: List Data User
       operationId: getUserJSON
       responses:
@@ -45,7 +45,7 @@ paths:
                   $ref: "#/components/schemas/User"
         "400":
           description: Invalid status value
-  /intermoni-login:
+  login:
     post:
       tags:
         - Auth
