@@ -7,7 +7,7 @@ info:
   contact:
     email: ryaasishlah123@gmail.com
   license:
-    name: pasetobackend Package
+    name: pasetobackendvpkg
     url: https://pkg.go.dev/github.com/pasabar/pasetobackendpasabar
   version: 1.0.1
 externalDocs:
