@@ -1,0 +1,346 @@
+openapi: 3.0.3
+info:
+  title: Dokumen API Cloud Function - OpenAPI 3.0
+  description: >-
+    Dokumentasi API untuk Aplikasi pasabar dari Cloud function 
+  termsOfService: 
+  contact:
+    email: 
+  license:
+    name: pasetobackendpasabar Package
+    url: github.com/pasabar/pasetobackendpasabar
+  version: 1.0.1
+externalDocs:
+  description: Website kami
+  url: 
+servers:
+  - url: 
+tags:
+  - name: 
+    description: 
+    externalDocs:
+      description: 
+      url: 
+  - name: 
+    description: 
+    externalDocs:
+      description: 
+      url: 
+  - name: 
+    description: 
+    externalDocs:
+      description: 
+      url: 
+paths:
+  /RegisterUser:
+    post:
+      tags:
+        - Users
+      summary: Register User Without Token
+      description: Daftar Akun User
+      operationId: authService
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '405':
+          description: Invalid input
+  /Login:
+    post:
+      tags:
+        - auth
+      summary: Login get Token
+      description: Login and Get User Token
+      operationId: authService
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Auth'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '405':
+          description: Invalid input
+
+  /GetUserWithToken:
+    get:
+      tags:
+        - Users
+      summary: Get Data User Khusus Admin
+      description: Header auth for admin only
+      operationId: GetdataUser
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/responseUser'
+        '400':
+          description: Invalid status value
+      security:
+        - Login:
+          - write:apiKey
+          - read:apiKey
+  /updatedataemployee:
+    put:
+      tags:
+        - employee
+      summary: Update data User Khusus Admin
+      description: Header auth for admin only
+      operationId: Updatedataemployee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Updated'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResponseEmployee'
+        '400':
+          description: Invalid status value
+      security:
+        - Login:
+          - write:apiKey
+          - read:apiKey
+  /InsertDataEmployee:
+    post:
+      tags:
+        - employee
+      summary: Insert data Employee Khusus Admin
+      description: Header auth for admin only
+      operationId: InsertdataEmployee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Employee'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResponseEmployee'
+        '400':
+          description: Invalid status value
+      security:
+        - Login:
+          - write:apiKey
+          - read:apiKey
+  /deleteuser:
+    delete:
+      tags:
+        - Users
+      summary: delete Khusus Admin
+      description: Header auth for admin only
+      operationId: DeleteUsers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReqUsers'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cred'
+        '400':
+          description: Invalid status value
+      security:
+        - Login:
+          - write:apiKey
+          - read:apiKey
+components:
+  schemas:
+    user:
+      type: object
+      properties:
+        username:
+          type: string
+          example : cihuy
+        password:
+          type: string
+          example: cihuypaswort
+        role:
+          type: string
+          example: user
+    Response:
+      type: object
+      properties:
+        status:
+          type: bool
+          example: true
+        message:
+          type: string
+          example: Berhasil Input data
+    responseUser:
+      type: object
+      properties:
+        status:
+          type: bool
+          example: true
+        message:
+          type: string
+          example: berhasil ambil data
+        data:
+          type: object
+          properties:
+            username:
+              type: string
+              example: cihuy
+            password:
+              type: string
+              example: hashed password
+            role:
+              type: string
+              example: user
+    ResponseBack:
+          type: object
+          properties:
+            Status:
+              type: integer
+              format: int32
+            Message:
+              type: string
+            Data:
+              type: array
+              items:
+                type: string
+    User:
+          type: object
+          properties:
+            Username:
+              type: string
+              description: The username of the user
+            Password:
+              type: string
+              description: The password of the user
+            Role:
+              type: string
+              description: The role of the user
+
+    ResponseEmployee:
+      type: object
+      properties:
+        Status:
+          type: integer
+          format: int32
+        Message:
+          type: string
+        Data:
+          $ref: '#/components/schemas/Employee'
+    Cred:
+      type: object
+      properties:
+        Status:
+          type: integer
+          format: int32
+        Message:
+          type: string
+
+    ReqUsers:
+      type: object
+      properties:
+        Username:
+          type: string
+    Employee:
+      type: object
+      properties:
+        EmployeeId:
+          type: string
+        Name:
+          type: string
+        Email:
+          type: string
+        Phone:
+          type: string
+        Division:
+          $ref: '#/components/schemas/Division'
+        Account:
+          $ref: '#/components/schemas/User'
+
+    Division:
+      type: object
+      properties:
+        DivId:
+          type: integer
+          format: int32
+        DivName:
+          type: string
+
+    Updated:
+      type: object
+      properties:
+        Email:
+          type: string
+        Phone:
+          type: string
+    Auth:
+      type: object
+      properties:
+        username:
+          type: string
+          example: cihuy
+        password:
+          type: string
+          example: cihuypasworthash
+    AuthResponse:
+      type: object
+      properties:
+        status:
+          type: bool
+          example: false
+        message:
+          type: string
+          example: Selamat Datang
+        token:
+          type: string
+          example: cihuy
+  requestBodies:
+    AuthReq:
+      description: Request Authentication
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Auth'
+    UserArray:
+      description: List of user object
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/AuthResponse'
+  securitySchemes:
+    Login:
+      type: apiKey
+      name: Login
+      in: header
