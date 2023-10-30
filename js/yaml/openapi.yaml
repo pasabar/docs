@@ -14,7 +14,7 @@ externalDocs:
   description: Website kami
   url: https://pasabar.github.io/
 servers:
-  - url: 
+  - url: https://us-central1-pasabar.cloudfunctions.net/pasabar
 tags:
   - name: 
     description: 
