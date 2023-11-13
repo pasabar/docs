@@ -1,37 +1,47 @@
 openapi: 3.0.3
 info:
-  title: Dokumen API Cloud Function Pasabar - OpenAPI 3.0
+  title: Dokumen API Cloud Function - OpenAPI 3.0
   description: >-
-    Dokumen API Cloud Function Aplikasi Pariwisata Jawa Barat
+    Dokumen API Cloud Function Aplikasi Internship Monitoring
   termsOfService: https://github.com/pasabar/docs
   contact:
     email: ryaasishlah123@gmail.com
   license:
-    name: pasetobackendpasabar
+    name: Intermoni Package
     url: https://pkg.go.dev/github.com/pasabar/pasetobackendpasabar
-  version: 1.0.1
+  version: 1.0.11
 externalDocs:
-  description: Repo backend
-  url: https://pasabar.github.io/pasetobackendpasabar/
+  description: Repo GCF
+  url: https://github.com/pasabar/cloudfunction_pasabar/
 servers:
-  - url: https://us-central1-pasabar.cloudfunctions.net/pasabar
+  - url: https://asia-southeast2-pasabar.cloudfunctions.net
 tags:
   - name: User
     description: Data User
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://pasabar.github.io/pasetobackendpasabar/
+      url: https://github.com/pasabar/cloudfunction_pasabar/user/
   - name: Auth
     description: Auth to Access to API
     externalDocs:
       description: Deskripsi dan Kode Program
-      url: https://pasabar.github.io/pasetobackendpasabar/
+      url: https://github.com/pasabar/cloudfunction_pasabar/login/
+  - name: Mahasiswa
+    description: Mahasiswa to Access to API
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://github.com/pasabar/cloudfunction_pasabar/mahasiswa/
+  - name: Mitra
+    description: Mitra to Access to API
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://github.com/pasabar/cloudfunction_pasabar/mitra/
 paths:
-  user:
+  /get-alluser:
     get:
       tags:
         - User
-      summary: Get userpasabar
+      summary: Get All User
       description: List Data User
       operationId: getUserJSON
       responses:
@@ -45,7 +55,7 @@ paths:
                   $ref: "#/components/schemas/User"
         "400":
           description: Invalid status value
-  login:
+  /loginuser:
     post:
       tags:
         - Auth
@@ -70,6 +80,121 @@ paths:
         - token:
             - write:apiKey
             - read:apiKey
+
+  /pasabar-catalog:
+    get:
+      tags:
+        - Catalog
+      summary: Get All Catalog
+      description: List Data Catalog
+      operationId: getAllCatalog
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CatalogArray"
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    post:
+      tags:
+        - Catalog
+      summary: Create Catalog
+      description: Create a new Catalog
+      operationId: createCatalog
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Catalog"
+      responses:
+        "201":
+          description: Catalog created successfully
+        "400":
+          description: Invalid input
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+  /getcatalog-byid:
+    get:
+      tags:
+        - Catalog
+      summary: Get Catalog by ID
+      description: Get a Catalog by its ID
+      operationId: getCatalogById
+      parameters:
+        - name: catalogId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Catalog
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Catalog"
+        "404":
+          description: Catalog not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    put:
+      tags:
+        - Catalog
+      summary: Update Catalog
+      description: Update an existing Catalog
+      operationId: updateCatalog
+      parameters:
+        - name: catalogId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Catalog
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Catalog"
+      responses:
+        "200":
+          description: Catalog updated successfully
+        "404":
+          description: Catalog not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+    delete:
+      tags:
+        - Catalog
+      summary: Delete Catalog
+      description: Delete a Catalog by its ID
+      operationId: deleteCatalog
+      parameters:
+        - name: catalogId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the Catalog
+      responses:
+        "204":
+          description: Catalog deleted successfully
+        "404":
+          description: Catalog not found
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
 components:
   schemas:
     User:
@@ -77,22 +202,42 @@ components:
       properties:
         _id:
           type: string
-          example: pasabarcoba
+          example: asdasdasdasd
         email:
           type: string
-          example: pasabar@gmail.com
+          example: admin@gmail.com
         role:
           type: string
           example: admin
     Login:
       type: object
       properties:
-        username:
+        email:
           type: string
-          example: pasabarcoba
+          example: yourmail@gmail.com
         password:
           type: string
-          example: pasabardotcom
+          example: secret
+    Mahasiswa:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1
+        name:
+          type: string
+          example: John Doe
+        studentId:
+          type: string
+          example: 123456
+        email:
+          type: string
+          example: john@example.com
+    MahasiswaArray:
+      description: List of Mahasiswa objects
+      type: array
+      items:
+        $ref: "#/components/schemas/Mahasiswa"
     AuthResponse:
       type: object
       properties:
@@ -101,10 +246,50 @@ components:
           example: true
         message:
           type: string
-          example: selamat datang
+          example: message
         token:
           type: string
           example: token
+    Mitra:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1
+        name:
+          type: string
+          example: Mitra Name
+        address:
+          type: string
+          example: Mitra Address
+        contact:
+          type: string
+          example: contact@example.com
+    MitraArray:
+      description: List of Mitra objects
+      type: array
+      items:
+        $ref: "#/components/schemas/Mitra"
+    Catalog:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1
+        name:
+          type: string
+          example: Catalog Name
+        duration:
+          type: string
+          example: 3 months
+        location:
+          type: string
+          example: Catalog Location
+    CatalogArray:
+      description: List of Catalog objects
+      type: array
+      items:
+        $ref: "#/components/schemas/Catalog"
   requestBodies:
     AuthReq:
       description: Request Authentication
@@ -123,5 +308,5 @@ components:
   securitySchemes:
     token:
       type: apiKey
-      name: token
+      name: Authorization
       in: header
