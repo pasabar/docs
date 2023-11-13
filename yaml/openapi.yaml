@@ -26,11 +26,7 @@ tags:
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://github.com/pasabar/cloudfunction_pasabar/login/
-  # - name: Mahasiswa
-  #   description: Mahasiswa to Access to API
-  #   externalDocs:
-  #     description: Deskripsi dan Kode Program
-  #     url: https://github.com/pasabar/cloudfunction_pasabar/mahasiswa/
+
   - name: Mitra
     description: Mitra to Access to API
     externalDocs:
@@ -218,58 +214,7 @@ components:
         password:
           type: string
           example: ganteng
-    # Mahasiswa:
-    #   type: object
-    #   properties:
-    #     id:
-    #       type: string
-    #       example: 1
-    #     name:
-    #       type: string
-    #       example: John Doe
-    #     studentId:
-    #       type: string
-    #       example: 123456
-    #     email:
-    #       type: string
-    #       example: john@example.com
-    # MahasiswaArray:
-    #   description: List of Mahasiswa objects
-    #   type: array
-    #   items:
-    #     $ref: "#/components/schemas/Mahasiswa"
-    # AuthResponse:
-    #   type: object
-    #   properties:
-    #     status:
-    #       type: bool
-    #       example: true
-    #     message:
-    #       type: string
-    #       example: message
-    #     token:
-    #       type: string
-    #       example: token
-    # Mitra:
-    #   type: object
-    #   properties:
-    #     id:
-    #       type: string
-    #       example: 1
-    #     name:
-    #       type: string
-    #       example: Mitra Name
-    #     address:
-    #       type: string
-    #       example: Mitra Address
-    #     contact:
-    #       type: string
-    #       example: contact@example.com
-    # MitraArray:
-    #   description: List of Mitra objects
-    #   type: array
-    #   items:
-    #     $ref: "#/components/schemas/Mitra"
+
     Catalog:
       type: object
       properties:
