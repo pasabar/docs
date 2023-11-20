@@ -21,7 +21,7 @@ tags:
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://pkg.go.dev/github.com/pasabar/pasetobackendpasabar
-  - name: register
+  - name: super admin
     description: Register Account
     externalDocs:
       description: Deskripsi dan Kode Program
