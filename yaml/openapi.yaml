@@ -32,7 +32,7 @@ tags:
       description: Deskripsi dan Kode Program
       url: https://pkg.go.dev/github.com/pasabar/pasetobackendpasabar
 paths:
-  /Register-Gis:
+  /superadminLogin:
     post:
       tags:
         - register
