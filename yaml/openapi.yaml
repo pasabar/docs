@@ -21,8 +21,8 @@ tags:
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://pkg.go.dev/github.com/pasabar/pasetobackendpasabar
-  - name: super admin
-    description: Register Account
+  - name: superadmin
+    description: SuperAdmin Account
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://pkg.go.dev/github.com/pasabar/pasetobackendpasabar
@@ -35,15 +35,15 @@ paths:
   /superadminLogin:
     post:
       tags:
-        - register
-      summary: Register User Without Token
-      description: Daftar Akun User
+        - SuperAdmin
+      summary: SuperAdmin With Token
+      description: Login Superadmin
       operationId: authService
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/user"
+              $ref: "#/components/schemas/superadmin"
       responses:
         "200":
           description: successful operation
@@ -130,10 +130,10 @@ components:
       properties:
         username:
           type: string
-          example: iyas
+          example: pasabaradmin
         password:
           type: string
-          example: iyaslodons
+          example: pasabar
     Response:
       type: object
       properties:
@@ -142,16 +142,19 @@ components:
           example: true
         message:
           type: string
-          example: Berhasil Input data
+          example: Selamat Datang admin
     responseUser:
       type: object
       properties:
         status:
           type: bool
-          example: true
+          example: false
         message:
           type: string
-          example: berhasil ambil data
+          example: Selamat Datang Pasabar
+        token:
+          type: string
+          example: pasabar
         data:
           type: object
           properties:
