@@ -5,14 +5,14 @@ info:
     Dokumentasi API untuk Aplikasi Pariwisata JawaBarat (Pasabar)
   termsOfService: https://github.com/pasabar
   contact:
-    email: fahadra96@gmail.com
+    email: ryaasishlah123@gmail.com
   license:
     name: GCF Package
     url: https://pkg.go.dev/github.com/pasabar/pasetobackendpasabar
-  version: 1.0.11
+  version: 0.0.8
 externalDocs:
   description: Swagger
-  url: https://gis-ryaas.github.io
+  url: http://pasabar.my.id/swagger/
 servers:
   - url: https://asia-southeast2-pasabar.cloudfunctions.net
 tags:
@@ -21,29 +21,29 @@ tags:
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://pkg.go.dev/github.com/pasabar/pasetobackendpasabar
-  - name: superadmin
-    description: SuperAdmin Account
+  - name: register admin
+    description: Register admin Account
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://pkg.go.dev/github.com/pasabar/pasetobackendpasabar
   - name: data
-    description: Data Untuk akses GIS
+    description: Data Untuk akses Pasabar
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://pkg.go.dev/github.com/pasabar/pasetobackendpasabar
 paths:
-  /superadminLogin:
+  /registeradmin:
     post:
       tags:
-        - SuperAdmin
-      summary: SuperAdmin With Token
-      description: Login Superadmin
+        - register
+      summary: Register User Without Token
+      description: Daftar Akun User
       operationId: authService
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/superadmin"
+              $ref: "#/components/schemas/user"
       responses:
         "200":
           description: successful operation
@@ -130,10 +130,10 @@ components:
       properties:
         username:
           type: string
-          example: pasabaradmin
+          example: iyas
         password:
           type: string
-          example: pasabar
+          example: iyaslodons
     Response:
       type: object
       properties:
@@ -142,19 +142,16 @@ components:
           example: true
         message:
           type: string
-          example: Selamat Datang admin
+          example: Berhasil Input data
     responseUser:
       type: object
       properties:
         status:
           type: bool
-          example: false
+          example: true
         message:
           type: string
-          example: Selamat Datang Pasabar
-        token:
-          type: string
-          example: pasabar
+          example: berhasil ambil data
         data:
           type: object
           properties:
