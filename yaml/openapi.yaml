@@ -36,8 +36,8 @@ paths:
     post:
       tags:
         - register
-      summary: Register User Without Token
-      description: Daftar Akun User
+      summary: Register Register Without Token
+      description: Daftar Akun Register
       operationId: authService
       requestBody:
         content:
@@ -53,7 +53,7 @@ paths:
                 $ref: "#/components/schemas/Response"
         "405":
           description: Invalid input
-  /Login-Gis:
+  /superadminLogin:
     post:
       tags:
         - auth
@@ -74,12 +74,12 @@ paths:
                 $ref: "#/components/schemas/AuthResponse"
         "405":
           description: Invalid input
-  /update-geo:
+  /update-catalog:
     put:
       tags:
         - data
-      summary: Update data geo
-      description: Update data nama by volume geo
+      summary: Update data catalog
+      description: Update data nama by id catalog
       operationId: authService
       requestBody:
         content:
@@ -104,9 +104,9 @@ paths:
     get:
       tags:
         - data
-      summary: Get Data Geojson
+      summary: Get Data Catalog
       description: Header auth
-      operationId: GetdataGeojson
+      operationId: GetdataCatalog
       responses:
         "200":
           description: successful operation
@@ -130,10 +130,10 @@ components:
       properties:
         username:
           type: string
-          example: iyas
+          example: pasabaradmin
         password:
           type: string
-          example: iyaslodons
+          example: admin
     Response:
       type: object
       properties:
@@ -157,34 +157,34 @@ components:
           properties:
             username:
               type: string
-              example: iyas
+              example: pasabar
             password:
               type: string
               example: hashed password
             role:
               type: string
-              example: user
+              example: admin
     Auth:
       type: object
       properties:
         username:
           type: string
-          example: iyas
+          example: pasabar
         password:
           type: string
-          example: iyaslodons
+          example: admin
     bodycord:
       type: object
       properties:
         type:
           type: string
-          example: polygon
+          example: garut
         name:
           type: string
-          example: iyas
+          example: indah sekali
         volume:
           type: string
-          example: "1"
+          example: gambar
     AuthResponse:
       type: object
       properties:
@@ -193,10 +193,10 @@ components:
           example: false
         message:
           type: string
-          example: Selamat Datang
+          example: Selamat Datang SuperAdmin
         token:
           type: string
-          example: iyas
+          example: pasabar
   requestBodies:
     AuthReq:
       description: Request Authentication
