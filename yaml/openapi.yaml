@@ -137,7 +137,7 @@ paths:
       tags:
         - catalog
       summary: Insert data Catalog Khusus Admin
-      description: Header auth for admin only
+      description: Header auth for admin
       operationId: InsertdataCatalog
       requestBody:
         content:
