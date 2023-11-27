@@ -110,7 +110,7 @@ paths:
       tags:
         - catalog
       summary: Update data User Khusus Admin
-      description: Header auth for admin only
+      description: Header auth for admin
       operationId: Updatedatacatalog
       requestBody:
         content:
