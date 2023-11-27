@@ -377,9 +377,9 @@ components:
           type: string
         phone:
           type: string
-        division:
-          $ref: '#/components/schemas/Division'
+        title:
+          $ref: '#/components/schemas/title'
         account:
           $ref: '#/components/schemas/User'
-        salary:
-          $ref: '#/components/schemas/Salary'
+        description:
+          $ref: '#/components/schemas/description'
