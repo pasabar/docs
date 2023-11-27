@@ -311,7 +311,7 @@ components:
           example: false
         message:
           type: string
-          example: Selamat Datang SuperAdmin
+          example: Selamat Datang Super Admin
         token:
           type: string
           example: pasabar
