@@ -31,6 +31,11 @@ tags:
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://pkg.go.dev/github.com/pasabar/pasetobackendpasabar
+  - name: catalog
+    description: Auth to Access to API
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://pkg.go.dev/github.com/pasabar/pasetobackendpasabar
 paths:
   /registeradmin:
     post:
@@ -100,28 +105,141 @@ paths:
             - write:apiKey
             - read:apiKey
 
-  /getall-geojson:
-    get:
+ /updatedatacatalog:
+    put:
       tags:
-        - data
-      summary: Get Data Catalog
-      description: Header auth
-      operationId: GetdataCatalog
+        - catalog
+      summary: Update data User Khusus Admin
+      description: Header auth for admin only
+      operationId: Updatedatacatalog
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Catalog'
       responses:
-        "200":
+        '200':
           description: successful operation
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/responseUser"
-        "400":
+                  $ref: '#/components/schemas/ResponseCatalog'
+        '400':
           description: Invalid status value
       security:
         - Login:
-            - write:apiKey
-            - read:apiKey
+          - write:apiKey
+          - read:apiKey
+  /InsertDataCatalog:
+    post:
+      tags:
+        - catalog
+      summary: Insert data Catalog Khusus Admin
+      description: Header auth for admin only
+      operationId: InsertdataCatalog
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Catalog'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResponseCatalog'
+        '400':
+          description: Invalid status value
+      security:
+        - Login:
+          - write:apiKey
+          - read:apiKey
+
+  /one-catalog:
+    post:
+      tags:
+        - catalog
+      summary: Get Data Catalog by catalogid
+      description: Header auth for admin only
+      operationId: GetOneCatalog
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestCatalog'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResponseCatalog'
+        '400':
+          description: Invalid status value
+      security:
+        - Login:
+          - write:apiKey
+          - read:apiKey
+
+
+  /get-all-catalog:
+    get:
+      tags:
+        - catalog
+      summary: Get data Catalog
+      description: Header auth for admin 
+      operationId: GetDataCatalog
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Catalog'
+        '400':
+          description: Invalid status value
+      security:
+        - Login:
+          - write:apiKey
+          - read:apiKey
+
+  /delete-catalog:
+    delete:
+      tags:
+        - catalog
+      summary: delete data catalog
+      description: Header auth for admin and 
+      operationId: DeleteCatalog
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestCatalog'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cred'
+        '400':
+          description: Invalid status value
+      security:
+        - Login:
+          - write:apiKey
+          - read:apiKey
+
 
 components:
   schemas:
@@ -217,3 +335,51 @@ components:
       type: apiKey
       name: Login
       in: header
+
+ ResponseCatalog:
+      type: object
+      properties:
+        Status:
+          type: integer
+          format: int32
+        Message:
+          type: string
+        Data:
+          $ref: '#/components/schemas/Catalog'
+    Cred:
+      type: object
+      properties:
+        Status:
+          type: integer
+          format: int32
+        Message:
+          type: string
+
+    RequestCatalog:
+      type: object
+      properties:
+        catalogid:
+          type: string
+
+    ReqUsers:
+      type: object
+      properties:
+        Username:
+          type: string
+    Catalog:
+      type: object
+      properties:
+        catalogid:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        division:
+          $ref: '#/components/schemas/Division'
+        account:
+          $ref: '#/components/schemas/User'
+        salary:
+          $ref: '#/components/schemas/Salary'
