@@ -82,8 +82,8 @@ paths:
           description: Invalid input
       security:
         - Login:
-            - write:apiKey
-            - read:apiKey
+            - write: apiKey
+            - read: apiKey
 
   /Insert-Catalog:
     put:
@@ -96,22 +96,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Catalog'
+              $ref: "#/components/schemas/Catalog"
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ResponseCatalog'
-        '400':
+                  $ref: "#/components/schemas/ResponseCatalog"
+        "400":
           description: Invalid status value
       security:
         - Login:
-          - write:apiKey
-          - read:apiKey
+            - write: apiKey
+            - read: apiKey
 
   /Delete-Catalog:
     post:
@@ -124,22 +124,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Catalog'
+              $ref: "#/components/schemas/Catalog"
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ResponseCatalog'
-        '400':
+                  $ref: "#/components/schemas/ResponseCatalog"
+        "400":
           description: Invalid status value
       security:
         - Login:
-          - write:apiKey
-          - read:apiKey
+            - write: apiKey
+            - read: apiKey
 
   /GetAll-dataCatalog:
     post:
@@ -152,46 +152,45 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RequestCatalog'
+              $ref: "#/components/schemas/RequestCatalog"
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ResponseCatalog'
-        '400':
+                  $ref: "#/components/schemas/ResponseCatalog"
+        "400":
           description: Invalid status value
       security:
         - Login:
-          - write:apiKey
-          - read:apiKey
-
+            - write: apiKey
+            - read: apiKey
 
   /GetAll-CatalogID:
     get:
       tags:
         - catalog
       summary: Get data Catalog
-      description: Header auth for admin 
+      description: Header auth for admin
       operationId: GetDataCatalog
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Catalog'
-        '400':
+                  $ref: "#/components/schemas/Catalog"
+        "400":
           description: Invalid status value
       security:
         - Login:
-          - write:apiKey
-          - read:apiKey
+            - write: apiKey
+            - read: apiKey
 
 components:
   schemas:
@@ -289,26 +288,26 @@ components:
       in: header
 
   ResponseCatalog:
-      type: object
-      properties:
-        Status:
-          type: integer
-          format: int32
-        Message:
-          type: string
-        Data:
-          $ref: '#/components/schemas/Catalog'
+    type: object
+    properties:
+      Status:
+        type: integer
+        format: int32
+      Message:
+        type: string
+      Data:
+        $ref: "#/components/schemas/Catalog"
 
-    Catalog:
-      type: object
-      properties:
-        nomorid:
-          type: string
-        title:
-          type: string
-        deskripsi:
-          type: string
-        image:
-          type: string
-        status:
-          type: string
+  Catalog:
+    type: object
+    properties:
+      nomorid:
+        type: string
+      title:
+        type: string
+      deskripsi:
+        type: string
+      image:
+        type: string
+      status:
+        type: string
