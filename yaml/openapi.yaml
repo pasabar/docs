@@ -3,7 +3,7 @@ info:
   title: Dokumen API Cloud Function GIS- OpenAPI 3.0
   description: >-
     Dokumentasi API untuk Aplikasi Pariwisata JawaBarat (Pasabar)
-  termsOfService: https://github.com/pasabar
+  termsOfService: https://github.com/pasabar/swagger
   contact:
     email: 1214030@std.ulbi.ac.id
   license:
@@ -11,8 +11,8 @@ info:
     url: https://pkg.go.dev/github.com/pasabar/pasetobackendpasabar
   version: 0.0.8
 externalDocs:
-  description: Swagger
-  url: http://pasabar.my.id/swagger/
+  description: Website Kami
+  url: http://pasabar.my.id
 servers:
   - url: https://asia-southeast2-pasabar.cloudfunctions.net
 tags:
@@ -21,8 +21,8 @@ tags:
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://pkg.go.dev/github.com/pasabar/pasetobackendpasabar
-  - name: register admin
-    description: Register admin Account
+  - name: Admin
+    description: Admin Account
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://pkg.go.dev/github.com/pasabar/pasetobackendpasabar
@@ -58,7 +58,7 @@ paths:
                 $ref: "#/components/schemas/AuthResponse"
         "405":
           description: Invalid input
-  /update-catalog:
+  /Update-Catalog:
     put:
       tags:
         - data
@@ -84,7 +84,7 @@ paths:
             - write:apiKey
             - read:apiKey
 
- /updatedatacatalog:
+  /updatedatacatalog:
     put:
       tags:
         - catalog
