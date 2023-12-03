@@ -299,31 +299,16 @@ components:
         Data:
           $ref: '#/components/schemas/Catalog'
 
-    RequestCatalog:
-      type: object
-      properties:
-        catalogid:
-          type: string
-
-    ReqUsers:
-      type: object
-      properties:
-        Username:
-          type: string
     Catalog:
       type: object
       properties:
-        catalogid:
-          type: string
-        name:
-          type: string
-        email:
-          type: string
-        phone:
+        nomorid:
           type: string
         title:
-          $ref: '#/components/schemas/title'
-        account:
-          $ref: '#/components/schemas/User'
-        description:
-          $ref: '#/components/schemas/description'
+          type: string
+        deskripsi:
+          type: string
+        image:
+          type: string
+        status:
+          type: string
