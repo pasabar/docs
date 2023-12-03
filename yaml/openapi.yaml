@@ -21,16 +21,6 @@ tags:
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://pkg.go.dev/github.com/pasabar/pasetobackendpasabar
-  - name: Admin
-    description: Admin Account
-    externalDocs:
-      description: Deskripsi dan Kode Program
-      url: https://pkg.go.dev/github.com/pasabar/pasetobackendpasabar
-  - name: data
-    description: Data Untuk akses Pasabar
-    externalDocs:
-      description: Deskripsi dan Kode Program
-      url: https://pkg.go.dev/github.com/pasabar/pasetobackendpasabar
   - name: catalog
     description: Auth to Access to API
     externalDocs:
@@ -62,7 +52,7 @@ paths:
   /Update-Catalog:
     put:
       tags:
-        - data
+        - catalog
       summary: Update data catalog
       description: Update data nama by id catalog
       operationId: authService
