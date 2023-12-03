@@ -298,14 +298,6 @@ components:
           type: string
         Data:
           $ref: '#/components/schemas/Catalog'
-    Cred:
-      type: object
-      properties:
-        Status:
-          type: integer
-          format: int32
-        Message:
-          type: string
 
     RequestCatalog:
       type: object
