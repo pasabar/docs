@@ -37,28 +37,7 @@ tags:
       description: Deskripsi dan Kode Program
       url: https://pkg.go.dev/github.com/pasabar/pasetobackendpasabar
 paths:
-  /registeradmin:
-    post:
-      tags:
-        - register
-      summary: Register Register Without Token
-      description: Daftar Akun Register
-      operationId: authService
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/user"
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Response"
-        "405":
-          description: Invalid input
-  /superadminLogin:
+  /Admin-Login:
     post:
       tags:
         - auth
