@@ -141,7 +141,7 @@ paths:
           - write:apiKey
           - read:apiKey
 
-  /GetAll-Catalog:
+  /GetAll-dataCatalog:
     post:
       tags:
         - catalog
