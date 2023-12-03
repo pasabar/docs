@@ -58,6 +58,7 @@ paths:
                 $ref: "#/components/schemas/AuthResponse"
         "405":
           description: Invalid input
+
   /Update-Catalog:
     put:
       tags:
@@ -84,11 +85,11 @@ paths:
             - write:apiKey
             - read:apiKey
 
-  /updatedatacatalog:
+  /Insert-Catalog:
     put:
       tags:
         - catalog
-      summary: Update data User Khusus Admin
+      summary: Insert data catalog
       description: Header auth for admin
       operationId: Updatedatacatalog
       requestBody:
@@ -111,11 +112,12 @@ paths:
         - Login:
           - write:apiKey
           - read:apiKey
-  /InsertDataCatalog:
+
+  /Delete-Catalog:
     post:
       tags:
         - catalog
-      summary: Insert data Catalog Khusus Admin
+      summary: Delete data catalog
       description: Header auth for admin
       operationId: InsertdataCatalog
       requestBody:
@@ -139,13 +141,13 @@ paths:
           - write:apiKey
           - read:apiKey
 
-  /one-catalog:
+  /GetAll-Catalog:
     post:
       tags:
         - catalog
-      summary: Get Data Catalog by catalogid
+      summary: Get semua data catalog
       description: Header auth for admin only
-      operationId: GetOneCatalog
+      operationId: GetDataCatalog
       requestBody:
         content:
           application/json:
@@ -168,7 +170,7 @@ paths:
           - read:apiKey
 
 
-  /get-all-catalog:
+  /GetAll-CatalogID:
     get:
       tags:
         - catalog
@@ -190,35 +192,6 @@ paths:
         - Login:
           - write:apiKey
           - read:apiKey
-
-  /delete-catalog:
-    delete:
-      tags:
-        - catalog
-      summary: delete data catalog
-      description: Header auth for admin and 
-      operationId: DeleteCatalog
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RequestCatalog'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Cred'
-        '400':
-          description: Invalid status value
-      security:
-        - Login:
-          - write:apiKey
-          - read:apiKey
-
 
 components:
   schemas:
@@ -315,7 +288,7 @@ components:
       name: Login
       in: header
 
- ResponseCatalog:
+  ResponseCatalog:
       type: object
       properties:
         Status:
