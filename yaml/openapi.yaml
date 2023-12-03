@@ -5,14 +5,14 @@ info:
     Dokumentasi API untuk Aplikasi Pariwisata JawaBarat (Pasabar)
   termsOfService: https://github.com/pasabar
   contact:
-    email: fahadra96@gmail.com
+    email: ryaasishlah123@gmail.com
   license:
     name: GCF Package
     url: https://pkg.go.dev/github.com/pasabar/pasetobackendpasabar
-  version: 1.0.11
+  version: 0.0.8
 externalDocs:
   description: Swagger
-  url: https://gis-ryaas.github.io
+  url: http://pasabar.my.id/swagger/
 servers:
   - url: https://asia-southeast2-pasabar.cloudfunctions.net
 tags:
@@ -21,23 +21,28 @@ tags:
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://pkg.go.dev/github.com/pasabar/pasetobackendpasabar
-  - name: super admin
-    description: Register Account
+  - name: register admin
+    description: Register admin Account
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://pkg.go.dev/github.com/pasabar/pasetobackendpasabar
   - name: data
-    description: Data Untuk akses GIS
+    description: Data Untuk akses Pasabar
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://pkg.go.dev/github.com/pasabar/pasetobackendpasabar
+  - name: catalog
+    description: Auth to Access to API
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://pkg.go.dev/github.com/pasabar/pasetobackendpasabar
 paths:
-  /superadminLogin:
+  /registeradmin:
     post:
       tags:
         - register
-      summary: Register User Without Token
-      description: Daftar Akun User
+      summary: Register Register Without Token
+      description: Daftar Akun Register
       operationId: authService
       requestBody:
         content:
@@ -53,7 +58,7 @@ paths:
                 $ref: "#/components/schemas/Response"
         "405":
           description: Invalid input
-  /Login-Gis:
+  /superadminLogin:
     post:
       tags:
         - auth
@@ -74,12 +79,12 @@ paths:
                 $ref: "#/components/schemas/AuthResponse"
         "405":
           description: Invalid input
-  /update-geo:
+  /update-catalog:
     put:
       tags:
         - data
-      summary: Update data geo
-      description: Update data nama by volume geo
+      summary: Update data catalog
+      description: Update data nama by id catalog
       operationId: authService
       requestBody:
         content:
@@ -100,28 +105,141 @@ paths:
             - write:apiKey
             - read:apiKey
 
-  /getall-geojson:
-    get:
+ /updatedatacatalog:
+    put:
       tags:
-        - data
-      summary: Get Data Geojson
-      description: Header auth
-      operationId: GetdataGeojson
+        - catalog
+      summary: Update data User Khusus Admin
+      description: Header auth for admin
+      operationId: Updatedatacatalog
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Catalog'
       responses:
-        "200":
+        '200':
           description: successful operation
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/responseUser"
-        "400":
+                  $ref: '#/components/schemas/ResponseCatalog'
+        '400':
           description: Invalid status value
       security:
         - Login:
-            - write:apiKey
-            - read:apiKey
+          - write:apiKey
+          - read:apiKey
+  /InsertDataCatalog:
+    post:
+      tags:
+        - catalog
+      summary: Insert data Catalog Khusus Admin
+      description: Header auth for admin
+      operationId: InsertdataCatalog
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Catalog'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResponseCatalog'
+        '400':
+          description: Invalid status value
+      security:
+        - Login:
+          - write:apiKey
+          - read:apiKey
+
+  /one-catalog:
+    post:
+      tags:
+        - catalog
+      summary: Get Data Catalog by catalogid
+      description: Header auth for admin only
+      operationId: GetOneCatalog
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestCatalog'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResponseCatalog'
+        '400':
+          description: Invalid status value
+      security:
+        - Login:
+          - write:apiKey
+          - read:apiKey
+
+
+  /get-all-catalog:
+    get:
+      tags:
+        - catalog
+      summary: Get data Catalog
+      description: Header auth for admin 
+      operationId: GetDataCatalog
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Catalog'
+        '400':
+          description: Invalid status value
+      security:
+        - Login:
+          - write:apiKey
+          - read:apiKey
+
+  /delete-catalog:
+    delete:
+      tags:
+        - catalog
+      summary: delete data catalog
+      description: Header auth for admin and 
+      operationId: DeleteCatalog
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestCatalog'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cred'
+        '400':
+          description: Invalid status value
+      security:
+        - Login:
+          - write:apiKey
+          - read:apiKey
+
 
 components:
   schemas:
@@ -130,10 +248,10 @@ components:
       properties:
         username:
           type: string
-          example: iyas
+          example: pasabaradmin
         password:
           type: string
-          example: iyaslodons
+          example: admin
     Response:
       type: object
       properties:
@@ -157,34 +275,34 @@ components:
           properties:
             username:
               type: string
-              example: iyas
+              example: pasabar
             password:
               type: string
               example: hashed password
             role:
               type: string
-              example: user
+              example: admin
     Auth:
       type: object
       properties:
         username:
           type: string
-          example: iyas
+          example: pasabar
         password:
           type: string
-          example: iyaslodons
+          example: admin
     bodycord:
       type: object
       properties:
         type:
           type: string
-          example: polygon
+          example: garut
         name:
           type: string
-          example: iyas
+          example: indah sekali
         volume:
           type: string
-          example: "1"
+          example: gambar
     AuthResponse:
       type: object
       properties:
@@ -193,10 +311,10 @@ components:
           example: false
         message:
           type: string
-          example: Selamat Datang
+          example: Selamat Datang Super Admin
         token:
           type: string
-          example: iyas
+          example: pasabar
   requestBodies:
     AuthReq:
       description: Request Authentication
@@ -217,3 +335,51 @@ components:
       type: apiKey
       name: Login
       in: header
+
+ ResponseCatalog:
+      type: object
+      properties:
+        Status:
+          type: integer
+          format: int32
+        Message:
+          type: string
+        Data:
+          $ref: '#/components/schemas/Catalog'
+    Cred:
+      type: object
+      properties:
+        Status:
+          type: integer
+          format: int32
+        Message:
+          type: string
+
+    RequestCatalog:
+      type: object
+      properties:
+        catalogid:
+          type: string
+
+    ReqUsers:
+      type: object
+      properties:
+        Username:
+          type: string
+    Catalog:
+      type: object
+      properties:
+        catalogid:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        title:
+          $ref: '#/components/schemas/title'
+        account:
+          $ref: '#/components/schemas/User'
+        description:
+          $ref: '#/components/schemas/description'
