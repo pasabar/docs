@@ -14,7 +14,7 @@ externalDocs:
   description: Repo backend
   url: http://pasabar.my.id/pasabarbackend/
 servers:
-  - url: https://asia-southeast2-hppinjam.cloudfunctions.net
+  - url: https://asia-southeast2-pasabar.cloudfunctions.net
 tags:
   - name: auth
     description: Authentikasi
