@@ -26,8 +26,8 @@ tags:
   #   externalDocs:
   #     description: Deskripsi dan Kode Program
   #     url: http://pasabar.my.id/pasabarbackend/
-  - name: hp
-    description: Mobile Phone Operations
+  - name: Catalog
+    description: Catalog Operations
     externalDocs:
       description: Deskripsi dan Kode Program
       url: http://pasabar.my.id/pasabarbackend/
@@ -98,17 +98,17 @@ paths:
   /Insert-Catalog:
     post:
       tags:
-        - hp
-      summary: Insert Mobile Phone
-      description: Insert mobile phone into the database
-      operationId: insertHpService
+        - Catalog
+      summary: Insert Catalog
+      description: Insert Catalog into the database
+      operationId: insertCatalogService
       security:
         - Login: []  # Menentukan bahwa endpoint ini membutuhkan skema keamanan 'Login'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/MobilePhone'
+              $ref: '#/components/schemas/Catalog'
       responses:
         '200':
           description: successful operation
@@ -125,16 +125,16 @@ paths:
   /Update-Catalog:
     put:
       tags:
-        - hp
-      summary: Update Mobile Phone by ID
-      description: Update mobile phone data in the database by ID
-      operationId: updateHpService
+        - Catalog
+      summary: Update Catalog by ID
+      description: Update Catalog data in the database by ID
+      operationId: updateCatalogService
       security:
         - Login: []  # Menentukan bahwa endpoint ini membutuhkan skema keamanan 'Login'
       parameters:
         - name: nomorid
           in: path
-          description: ID of the mobile phone to update
+          description: ID of the Catalog to update
           required: true
           schema:
             type: integer
@@ -142,7 +142,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/MobilePhone'
+              $ref: '#/components/schemas/Catalog'
       responses:
         '200':
           description: successful operation
@@ -155,16 +155,16 @@ paths:
         '403':
           description: Forbidden - Admin does not have permission
         '404':
-          description: Not Found - Mobile phone not found
+          description: Not Found - Catalog not found
         '405':
           description: Invalid input
   /GetAll-dataCatalog:
     get:
       tags:
-        - hp
-      summary: Get All Mobile Phones
-      description: Retrieve all mobile phone data from the database
-      operationId: getAllHpService
+        - Catalog
+      summary: Get All Catalogs
+      description: Retrieve all Catalog data from the database
+      operationId: getAllCatalogService
       security:
         - Login: []  # Menentukan bahwa endpoint ini membutuhkan skema keamanan 'Login'
       responses:
@@ -175,7 +175,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/MobilePhone'
+                  $ref: '#/components/schemas/Catalog'
         '401':
           description: Unauthorized - Admin not logged in
         '403':
@@ -185,16 +185,16 @@ paths:
   /Delete-Catalog:
     delete:
       tags:
-        - hp
-      summary: Delete Mobile Phone by ID
-      description: Delete mobile phone data from the database by ID
-      operationId: deleteHpService
+        - Catalog
+      summary: Delete Catalog by ID
+      description: Delete Catalog data from the database by ID
+      operationId: deleteCatalogService
       security:
         - Login: []  # Menentukan bahwa endpoint ini membutuhkan skema keamanan 'Login'
       parameters:
         - name: nomorid
           in: path
-          description: ID of the mobile phone to delete
+          description: ID of the Catalog to delete
           required: true
           schema:
             type: integer
@@ -210,7 +210,7 @@ paths:
         '403':
           description: Forbidden - Admin does not have permission
         '404':
-          description: Not Found - Mobile phone not found
+          description: Not Found - Catalog not found
         '405':
           description: Invalid input
 
@@ -234,7 +234,7 @@ components:
         password:
           type: string
           example: hebat
-    MobilePhone:
+    Catalog:
       type: object
       properties:
         nomorid:
@@ -290,10 +290,10 @@ components:
       properties:
         username:
           type: string
-          example: farhan
+          example: ryaas
         password:
           type: string
-          example: akurijik
+          example: akuishlah
     AuthResponse:
       type: object
       properties:
@@ -305,7 +305,7 @@ components:
           example: Selamat Datang
         token:
           type: string
-          example: akurijik
+          example: aku admin
   requestBodies:
     AuthReq:
       description: Request Authentication
@@ -319,12 +319,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/AdminAuth'
-    MobilePhoneReq:
-      description: Request Mobile Phone Insertion
+    CatalogReq:
+      description: Request Catalog Insertion
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/MobilePhone'
+            $ref: '#/components/schemas/Catalog'
     UserArray:
       description: List of user object
       content:
