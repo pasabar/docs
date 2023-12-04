@@ -3,7 +3,7 @@ info:
   title: Dokumen API Cloud Function PASABAR OpenAPI 3.0
   description: >-
 Dokumentasi API untuk Aplikasi Pariwisata JawaBarat (Pasabar)
-  termsOfService: http://pasabar.my.id/swagger
+  termsOfService: https://pasabar.my.id/swagger/
   contact:
     email: ryaasishlah123@gmail.com
   license:
