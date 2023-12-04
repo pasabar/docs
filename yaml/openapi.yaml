@@ -204,7 +204,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DeleteCatalog'
+                $ref: '#/components/schemas/Response'
         '401':
           description: Unauthorized - Admin not logged in
         '403':
@@ -258,12 +258,12 @@ components:
         message:
           type: string
           example: Berhasil Input data
-              DeleteCatalog:
+    DeleteComment:
       type: object
       properties:
         id:
           type: int
-          example: 1
+          example: 123          
     responseUser:
       type: object
       properties:
