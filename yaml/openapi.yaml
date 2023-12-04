@@ -1,65 +1,173 @@
 openapi: 3.0.3
 info:
-  title: Dokumen API Cloud Function - OpenAPI 3.0
+  title: Dokumen API Cloud Function PASABAR OpenAPI 3.0
   description: >-
-    Dokumen API Cloud Function Hp Pinjam
-  termsOfService: https://hp-pinjam.my.id/swagger/
+Dokumentasi API untuk Aplikasi Pariwisata JawaBarat (Pasabar)
+  termsOfService: http://pasabar.my.id/swagger
   contact:
-    email: farhanriziq01@gmail.com
+    email: ryaasishlah123@gmail.com
   license:
-    name: Pasetobackend Package
-    url1: https://pkg.go.dev/github.com/hp-pinjam/pasetobackend
-    url2: https://pkg.go.dev/github.com/hp-pinjam/be_p3
-  version: 1.0.1
+    name: pasabarbackend
+    url: https://pkg.go.dev/github.com/pasabar/pasabarbackend
+  version: 0.1.3
 externalDocs:
-  description: Repo backend
-  url: http://hp-pinjam.my.id/pasetobackend/
+  description: Repo GCF
+  url: https://pkg.go.dev/github.com/pasabar/pasabarbackend
 servers:
-  - url: https://asia-southeast2-hppinjam.cloudfunctions.net
+  - url: https://asia-southeast2-pasabar.cloudfunctions.net
 tags:
-  - name: auth
-    description: Authentikasi
-    externalDocs:
-      description: Deskripsi dan Kode Program
-      url: http://hp-pinjam.my.id/pasetobackend/
-  - name: register
-    description: Register Account
-    externalDocs:
-      description: Deskripsi dan Kode Program
-      url: http://hp-pinjam.my.id/pasetobackend/
-  - name: hp
-    description: Mobile Phone Operations
-    externalDocs:
-      description: Deskripsi dan Kode Program
-      url: http://hp-pinjam.my.id/pasetobackend/
+  - name: admin
+    description: Create Account Admin
 paths:
-  /registeruser:
-    post:
+  /GetAll-Crawling:
+    get:
       tags:
-        - register
-      summary: Register User Without Token
-      description: Daftar Akun User
-      operationId: authService
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/user'
+        - Data Grafik 
+      summary: Get Data Crawling
+      description: List Data Crawling
+      operationId: GetCrawling
       responses:
         '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Response'
-        '405':
-          description: Invalid input
-  /Login:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Crawling'
+        '400':
+          description: Invalid status value
+  /GetAllWisata:
+    get:
+      tags:
+        - Data Grafik Admin
+      summary: Get Data wisata
+      description: List Data wisata
+      operationId: Getwisata
+      responses:
+        '200':
+          description: successful operation wisata
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateWisata'
+        '400':
+          description: Invalid status value
+  /GetAll-dataCatalog:
+    get:
+      tags:
+        - Data Grafik Admin
+      summary: Get Data Catalog
+      description: List Data Catalog
+      operationId: getCatalog
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CreateCatalog'
+        '400':
+          description: Invalid status value
+  /GetAll-Restoran:
+    get:
+      tags:
+        - Data Grafik Admin
+      summary: Get Data Restoran
+      description: List Data Restoran
+      operationId: getRestoran
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/content'
+        '400':
+          description: Invalid status value
+  # /getallevent:
+  #   get:
+  #     tags:
+  #       - Data Grafik
+  #     summary: Get Data Event 
+  #     description: List Data Event 
+  #     operationId: Event 
+  #     responses:
+  #       '200':
+  #         description: successful operation
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: array
+  #               items:
+  #                 $ref: '#/components/schemas/event'
+  #       '400':
+  #         description: Invalid status value
+  # /getalleventglobal:
+  #   get:
+  #     tags:
+  #       - Data Grafik
+  #     summary: Get Data Event Global
+  #     description: List Data Event Global
+  #     operationId: Event Global
+  #     responses:
+  #       '200':
+  #         description: successful operation
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: array
+  #               items:
+  #                 $ref: '#/components/schemas/EventGlobal'
+  #       '400':
+  #         description: Invalid status value
+  /GetAll-About:
+    get:
+      tags:
+        - Data Grafik
+      summary: Get About 
+      description: List About 
+      operationId: Event About
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/about'
+        '400':
+          description: Invalid status value
+  /GetAll-Hotel:
+    get:
+      tags:
+        - Data Grafik Admin
+      summary: Get Hotel 
+      description: List Hotel 
+      operationId: Event Hotel
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/about'
+        '400':
+          description: Invalid status value
+  /Admin-Login:
     post:
       tags:
-        - auth
-      summary: User Login to Get Token
-      description: User Login and Get Token
+        - Admin
+      summary: Login get Token
+      description: Login and Get Admin Token
       operationId: authService
       requestBody:
         content:
@@ -75,99 +183,237 @@ paths:
                 $ref: '#/components/schemas/AuthResponse'
         '405':
           description: Invalid input
-  /adminlogin:
+  # /createacountfix:
+  #   post:
+  #     tags:
+  #       - Create Account
+  #     summary: Create Account
+  #     description: Create Account
+  #     operationId: CreateAccount Service
+  #     requestBody:
+  #       content:
+  #         application/json:
+  #           schema:
+  #             $ref: '#/components/schemas/CreateAccount'
+  #     responses:
+  #       '200':
+  #         description: successful operation
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: '#/components/schemas/CreateAccount'
+  #       '405':
+  #         description: Invalid input
+  # /login:
+  #   post:
+  #     tags:
+  #       - admin
+  #     summary: Create Catalog Data
+  #     description: Add new Catalog data
+  #     operationId: create Catalog
+  #     requestBody:
+  #       required: true
+  #       content:
+  #         application/json:
+  #           schema:
+  #             $ref: '#/components/schemas/Auth' # Gunakan skema yang sesuai di sini
+  #     responses:
+  #       '201':
+  #         description: Data successfully login
+  #       '400':
+  #         description: Invalid input or request body
+  /Insert-Catalog:
     post:
       tags:
-        - auth
-      summary: Admin Login to Get Token
-      description: Admin Login and Get Token using Email and Password
-      operationId: adminLoginService
+        - Catalog
+      summary: Create Catalog Data
+      description: Add new Catalog data
+      operationId: create Catalog
       requestBody:
+        required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AdminAuth'
+              $ref: '#/components/schemas/CreateCatalog' # Gunakan skema yang sesuai di sini
       responses:
         '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AuthResponse'
-        '405':
-          description: Invalid input
-  /insertdatahp:
-    post:
-      tags:
-        - hp
-      summary: Insert Mobile Phone
-      description: Insert mobile phone into the database
-      operationId: insertHpService
+                items:
+                  $ref: '#/components/schemas/CreateCatalog'
+        '400':
+          description: Invalid input or request body
       security:
-        - Login: []  # Menentukan bahwa endpoint ini membutuhkan skema keamanan 'Login'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/MobilePhone'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
-        '401':
-          description: Unauthorized - Admin not logged in
-        '403':
-          description: Forbidden - Admin does not have permission
-        '405':
-          description: Invalid input
-  /updatehp:
+        - token: []
+  /Update-Catalog:
     put:
       tags:
-        - hp
-      summary: Update Mobile Phone by ID
-      description: Update mobile phone data in the database by ID
-      operationId: updateHpService
-      security:
-        - Login: []  # Menentukan bahwa endpoint ini membutuhkan skema keamanan 'Login'
-      parameters:
-        - name: nomorid
-          in: path
-          description: ID of the mobile phone to update
-          required: true
-          schema:
-            type: integer
+        - Catalog
+      summary: Updated Catalog Data berdasarkan nomor id
+      description: Updated Catalog data
+      operationId: Updated Catalog
       requestBody:
+        required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/MobilePhone'
+              $ref: '#/components/schemas/catalog' # Gunakan skema yang sesuai di sini
       responses:
         '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Response'
-        '401':
-          description: Unauthorized - Admin not logged in
-        '403':
-          description: Forbidden - Admin does not have permission
-        '404':
-          description: Not Found - Mobile phone not found
-        '405':
-          description: Invalid input
-  /getdataallhp:
-    get:
-      tags:
-        - hp
-      summary: Get All Mobile Phones
-      description: Retrieve all mobile phone data from the database
-      operationId: getAllHpService
+                items:
+                  $ref: '#/components/schemas/CreateCatalog'
+        '400':
+          description: Invalid input or request body
       security:
-        - Login: []  # Menentukan bahwa endpoint ini membutuhkan skema keamanan 'Login'
+        - token: []
+  /Delete-Catalog:
+    delete:
+      tags:
+        - Catalog
+      summary: delete Catalog Data berdasarkan nomor id
+      description: delete Catalog data
+      operationId: delete Catalog
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteCatalog' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CreateCatalog'
+        '400':
+          description: Invalid input or request body
+      security:
+        - token: []
+  # /createcontent-1:
+  #   post:
+  #     tags:
+  #       - Content
+  #     summary: Create Content Data
+  #     description: Add new Content data
+  #     operationId: create Content
+  #     requestBody:
+  #       required: true
+  #       content:
+  #         application/json:
+  #           schema:
+  #             $ref: '#/components/schemas/content' # Gunakan skema yang sesuai di sini
+  #     responses:
+  #       '200':
+  #         description: successful operation
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: array
+  #               items:
+  #                 $ref: '#/components/schemas/content'
+  #       '400':
+  #         description: Invalid input or request body
+  #     security:
+  #       - token: []
+  # /updatecontentt:
+  #   patch:
+  #     tags:
+  #       - Content
+  #     summary: Update Content Data
+  #     description: Update Content data
+  #     operationId: Update Content
+  #     requestBody:
+  #       required: true
+  #       content:
+  #         application/json:
+  #           schema:
+  #             $ref: '#/components/schemas/content' # Gunakan skema yang sesuai di sini
+  #     responses:
+  #       '200':
+  #         description: successful operation
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: array
+  #               items:
+  #                 $ref: '#/components/schemas/content'
+  #       '400':
+  #         description: Invalid input or request body
+  #     security:
+  #       - token: []
+  # /deletecontentt:
+  #   delete:
+  #     tags:
+  #       - Content
+  #     summary: delete Content Data berdasarkan nomor id
+  #     description: delete Content data
+  #     operationId: delete Content
+  #     requestBody:
+  #       required: true
+  #       content:
+  #         application/json:
+  #           schema:
+  #             $ref: '#/components/schemas/DeleteContent' # Gunakan skema yang sesuai di sini
+  #     responses:
+  #       '200':
+  #         description: successful operation
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: array
+  #               items:
+  #                 $ref: '#/components/schemas/content'
+  #       '400':
+  #         description: Invalid input or request body
+  #     security:
+  #       - token: []
+  # /deleteeventgloball:
+  #   delete:
+  #     tags:
+  #       - Event Global
+  #     summary: delete Event Global Data berdasarkan nomor id
+  #     description: delete Event Global data
+  #     operationId: delete Event Global
+  #     requestBody:
+  #       required: true
+  #       content:
+  #         application/json:
+  #           schema:
+  #             $ref: '#/components/schemas/DeleteEventGlobal' # Gunakan skema yang sesuai di sini
+  #     responses:
+  #       '200':
+  #         description: successful operation
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: array
+  #               items:
+  #                 $ref: '#/components/schemas/EventGlobal'
+  #       '400':
+  #         description: Invalid input or request body
+  #     security:
+  #       - token: []
+  /InsertWisata:
+    post:
+      tags:
+        - Wisata
+      summary: Create Wisata Data
+      description: Create Wisata data
+      operationId: Create Wisata
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWisata' # Gunakan skema yang sesuai di sini
       responses:
         '200':
           description: successful operation
@@ -176,119 +422,592 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/MobilePhone'
-        '401':
-          description: Unauthorized - Admin not logged in
-        '403':
-          description: Forbidden - Admin does not have permission
-        '405':
-          description: Invalid input
-  /deletehp:
+                  $ref: '#/components/schemas/CreateWisata'
+        '400':
+          description: Invalid input or request body
+      security:
+        - token: []
+
+  /DeleteWisata:
     delete:
       tags:
-        - hp
-      summary: Delete Mobile Phone by ID
-      description: Delete mobile phone data from the database by ID
-      operationId: deleteHpService
-      security:
-        - Login: []  # Menentukan bahwa endpoint ini membutuhkan skema keamanan 'Login'
-      parameters:
-        - name: nomorid
-          in: path
-          description: ID of the mobile phone to delete
-          required: true
-          schema:
-            type: integer
+        - Wisata
+      summary: delete Wisata Data berdasarkan nomor id
+      description: delete Wisata data
+      operationId: delete Wisata
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteWisata' # Gunakan skema yang sesuai di sini
       responses:
         '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Response'
-        '401':
-          description: Unauthorized - Admin not logged in
-        '403':
-          description: Forbidden - Admin does not have permission
-        '404':
-          description: Not Found - Mobile phone not found
-        '405':
-          description: Invalid input
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateWisata'
+        '400':
+          description: Invalid input or request body
+      security:
+        - token: []
+
+         /UpdateWisata:
+    patch:
+      tags:
+        - Wisata
+      summary: Update Wisata Data berdasarkan nomor id
+      description: Update Wisata data
+      operationId: Update Wisata
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWisata' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateWisata'
+        '400':
+          description: Invalid input or request body
+      security:
+        - token: []
+
+  /Insert-Hotel:
+    post:
+      tags:
+        - Hotel
+      summary: Create Hotel Data
+      description: Create Hotel data
+      operationId: Create Hotel
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/hotelfix' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/hotelfix'
+        '400':
+          description: Invalid input or request body
+      security:
+        - token: []
+
+  /Delete-Hotel:
+    delete:
+      tags:
+        - Hotel
+      summary: delete Hotel Data berdasarkan nomor id
+      description: delete Hotel data
+      operationId: delete Hotel
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/hoteldelete' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/hotelfix'
+        '400':
+          description: Invalid input or request body
+      security:
+        - token: []
+  /Update-Hotel:
+    patch:
+      tags:
+        - Hotel
+      summary: Update Hotel Data berdasarkan nomor id
+      description: Update Hotel data
+      operationId: Update Hotel
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/hotelfix' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/about'
+        '400':
+          description: Invalid input or request body
+      security:
+        - token: []
+
+  # /createeventglobal:
+  #   post:
+  #     tags:
+  #       - Event Global
+  #     summary: Create Event Global Data
+  #     description: Create Event Global data
+  #     operationId: Create Event Global
+  #     requestBody:
+  #       required: true
+  #       content:
+  #         application/json:
+  #           schema:
+  #             $ref: '#/components/schemas/EventGlobal' # Gunakan skema yang sesuai di sini
+  #     responses:
+  #       '200':
+  #         description: successful operation
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: '#/components/schemas/EventGlobal'
+  #       '400':
+  #         description: Invalid input or request body
+  #     security:
+  #       - token: []
+
+ 
+  # /updateeventgloball:
+  #   patch:
+  #     tags:
+  #       - Event Global
+  #     summary: Update Wisata Data berdasarkan nomor id
+  #     description: Update Wisata data
+  #     operationId: Update Wisata
+  #     requestBody:
+  #       required: true
+  #       content:
+  #         application/json:
+  #           schema:
+  #             $ref: '#/components/schemas/EventGlobal' # Gunakan skema yang sesuai di sini
+  #     responses:
+  #       '200':
+  #         description: Success Update Event Global
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: '#/components/schemas/EventGlobal'
+  #       '400':
+  #         description: Invalid input or request body
+  #     security:
+  #       - token: []      
 
 components:
   schemas:
-    user:
+
+    Crawling:
       type: object
       properties:
-        username:
+        type:
           type: string
-          example: farhan
-        password:
+        geometry:
+          type: object
+          properties:
+            type: 
+              type: string
+            coordinates: 
+              type: array
+        properties:
+          type: object
+          properties:
+            name:
+              type: string
+
+    CreateCatalog:
+      type: object
+      properties:
+        Nomorid:
+          type: int
+          example: 1
+        Title:
           type: string
-          example: akurijik
-    AdminAuth:
+          example: gunung nya
+        Description:
+          type: string
+          example: sangat indah
+        lokasi:
+          type: string
+          example: garut
+        Image:
+          type: string
+          example: aku laper
+        Status:
+          type: bool
+          example: true
+    Auth:
       type: object
       properties:
         email:
           type: string
-          example: hppinjam@gmail.com
+          example: pasabar@gmail.com
         password:
           type: string
           example: hebat
-    MobilePhone:
+    # CreateAccount:
+    #   type: object
+    #   properties:
+    #     adminname:
+    #       type: string
+    #       example: contoh
+    #     password:
+    #       type: string
+    #       example: contoh
+    #     no_whatsapp:
+    #       type: string
+    #       example: 62881023806530
+    EventGlobal:
       type: object
       properties:
-        nomorid:
-          type: integer
-          example: 5
-        title:
+        id:
+          type: int
+          example: 123
+        Title:
           type: string
-          example: Mitto
-        description:
+          example: udin123
+        Description:
           type: string
-          example: hp produk lokal
-        image:
+          example: kamu knp?
+        Tanggal:
           type: string
-          format: binary
-    Response:
+          example: aku laper
+        Image:
+          type: string
+          example: aku laper
+        Harga:
+          type: int
+          example: 123
+          
+        Content:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: int
+                example: 123
+              Content:
+                type: string
+                example: udin123
+              Image:
+                type: string
+                example: kamu knp?
+              Description:
+                type: string
+                example: aku laper
+              status:
+                type: bool
+                example: true
+        Catalog:
+          type: array
+          items:
+            type: object
+            properties:
+              Nomorid:
+                type: int
+                example: 123
+              Name:
+                type: string
+                example: udin123
+              Description:
+                type: string
+                example: kamu knp?
+              Price:
+                type: int
+                example: 123
+              Size:
+                type: string
+                example: aku laper
+              Stock:
+                type: int
+                example: 123
+              Image:
+                type: string
+                example: aku laper
+              status:
+                type: bool
+                example: true
+        Status:
+          type: bool
+          example: true
+      Title: string
+      Description: string
+      Tanggal: string
+      Image: string
+      Harga: number
+      Content:
+        - id: number
+          Content: string
+          Image: string
+          Description: string
+          status: boolean
+      Catalog:
+        - Nomorid: number
+          Name: string
+          Description: string
+          Price: number
+          Size: string
+          Stock: number
+          Image: string
+          status: boolean
+      Status: boolean
+    hotelfix:
       type: object
       properties:
+        id:
+          type: int
+          example: 123
+        content_one:
+          type: string
+          example: udin123
+        Content_two:
+          type: string
+          example: kamu knp?
+        Image:
+          type: string
+          example: aku laper
+        Title:
+          type: string
+          example: aku laper
+        Title_two:
+          type: string
+          example: aku laper
+        Description:
+          type: string
+          example: aku laper
+        description_two:
+          type: string
+          example: aku laper
+        description_3:
+          type: string
+          example: aku laper
         status:
           type: bool
           example: true
-        message:
-          type: string
-          example: Berhasil Input data
-    responseUser:
+      content_one: string
+      Content_two: string
+      Image: string
+      Title: string
+      Title_two: string
+      Description: string
+      description_two: string
+      description_3: string
+      status: boolean
+    hoteldelete:
       type: object
       properties:
-        status:
+        id:
+          type: int
+          example: 123
+    event:
+      type: object
+      properties:
+        id:
+          type: int
+          example: 123
+        Title:
+          type: string
+          example: udin123
+        Description:
+          type: string
+          example: kamu knp?
+        Tanggal:
+          type: string
+          example: aku laper
+        Image:
+          type: string
+          example: aku laper
+        Harga:
+          type: int
+          example: 123
+        LinkYoutube:
+          type: string
+          example: 123
+        Content:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: int
+                example: 123
+              Content:
+                type: string
+                example: udin123
+              Image:
+                type: string
+                example: kamu knp?
+              Description:
+                type: string
+                example: aku laper
+              status:
+                type: bool
+                example: true
+        Catalog:
+          type: array
+          items:
+            type: object
+            properties:
+              Nomorid:
+                type: int
+                example: 123
+              Name:
+                type: string
+                example: udin123
+              Description:
+                type: string
+                example: kamu knp?
+              Price:
+                type: int
+                example: 123
+              Size:
+                type: string
+                example: aku laper
+              Stock:
+                type: int
+                example: 123
+              Image:
+                type: string
+                example: aku laper
+              status:
+                type: bool
+                example: true
+        Status:
           type: bool
           example: true
-        message:
-          type: string
-          example: berhasil ambil data
-        data:
-          type: object
-          properties:
-            username:
-              type: string
-              example: farhan
-            password:
-              type: string
-              example: hashed password
-            role:
-              type: string
-              example: user
-    Auth:
+      Title: string
+      Description: string
+      Tanggal: string
+      Image: string
+      Harga: number
+      Content:
+        - id: number
+          Content: string
+          Image: string
+          Description: string
+          status: boolean
+      Catalog:
+        - Nomorid: number
+          Name: string
+          Description: string
+          Price: number
+          Size: string
+          Stock: number
+          Image: string
+          status: boolean
+      Status: boolean     
+    about:
       type: object
       properties:
-        username:
+        id:
+          type: int
+          example: 123
+        Title:
           type: string
-          example: farhan
-        password:
+          example: udin123
+        Description:
           type: string
-          example: akurijik
+          example: kamu knp?
+        Tanggal:
+          type: string
+          example: aku laper
+        Image:
+          type: string
+          example: aku laper
+        Harga:
+          type: int
+          example: 123
+        Content:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: int
+                example: 123
+              Content:
+                type: string
+                example: udin123
+              Image:
+                type: string
+                example: kamu knp?
+              Description:
+                type: string
+                example: aku laper
+              status:
+                type: bool
+                example: true
+        Catalog:
+          type: array
+          items:
+            type: object
+            properties:
+              Nomorid:
+                type: int
+                example: 123
+              Name:
+                type: string
+                example: udin123
+              Description:
+                type: string
+                example: kamu knp?
+              Price:
+                type: int
+                example: 123
+              Size:
+                type: string
+                example: aku laper
+              Stock:
+                type: int
+                example: 123
+              Image:
+                type: string
+                example: aku laper
+              status:
+                type: bool
+                example: true
+        Status:
+          type: bool
+          example: true
+      Title: string
+      Description: string
+      Tanggal: string
+      Image: string
+      Harga: number
+      Content:
+        - id: number
+          Content: string
+          Image: string
+          Description: string
+          status: boolean
+      Catalog:
+        - Nomorid: number
+          Name: string
+          Description: string
+          Price: number
+          Size: string
+          Stock: number
+          Image: string
+          status: boolean
+      Status: boolean
     AuthResponse:
       type: object
       properties:
@@ -297,31 +1016,114 @@ components:
           example: false
         message:
           type: string
-          example: Selamat Datang
+          example: fehguy
         token:
           type: string
-          example: akurijik
-  requestBodies:
+          example: fehguy
+    CreateWisata:
+      type: object
+      properties:
+        id:
+          type: int
+          example: 123
+        Adminname:
+          type: string
+          example: udin123
+        Wisata:
+          type: string
+          example: kamu knp?
+        Answer:
+          type: string
+          example: aku gpp
+        Question:
+          type: string
+          example: aku laper
+        Tanggal:
+          type: string
+          example: "23-09-32"
+    catalog:
+      type: object
+      properties:
+        Nomorid:
+          type: int
+          example: 123
+        Name:
+          type: string
+          example: udin123
+        Description:
+          type: string
+          example: kamu knp?
+        Price:
+          type: int
+          example: 123
+        Size:
+          type: string
+          example: aku laper
+        Stock:
+          type: int
+          example: 123
+        Image:
+          type: string
+          example: aku laper
+        Status:
+          type: bool
+          example: true
+    DeleteCatalog:
+      type: object
+      properties:
+        nomorid:
+          type: int
+          example: 123
+    DeleteContent:
+      type: object
+      properties:
+        id:
+          type: int
+          example: 123
+    DeleteWisata:
+      type: object
+      properties:
+        id:
+          type: int
+          example: 123
+    DeleteEventGlobal:
+      type: object
+      properties:
+        ID:
+          type: int
+          example: 123
+    content:
+      type: object
+      properties:
+        id:
+          type: int
+          example: 123
+        Content:
+          type: string
+          example: udin123
+        Image:
+          type: string
+          example: kamu knp?
+        Descriptopn:
+          type: int
+          example: 123
+        Status:
+          type: bool
+          example: true
     AuthReq:
       description: Request Authentication
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Auth'
-    AdminAuthReq:
-      description: Request Admin Authentication
-      content:
+    CreateEvent:
+      description: Request Authentication
+      eventglobal:
         application/json:
           schema:
-            $ref: '#/components/schemas/AdminAuth'
-    MobilePhoneReq:
-      description: Request Mobile Phone Insertion
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/MobilePhone'
-    UserArray:
-      description: List of user object
+            $ref: '#/components/schemas/EventGlobal'
+    AdminArray:
+      description: List of admin object
       content:
         application/json:
           schema:
@@ -329,7 +1131,7 @@ components:
             items:
               $ref: '#/components/schemas/AuthResponse'
   securitySchemes:
-    Login:
+    token:
       type: apiKey
-      name: Login
+      name: token
       in: header
