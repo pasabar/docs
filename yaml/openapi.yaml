@@ -197,7 +197,7 @@ paths:
           description: ID of the mobile phone to delete
           required: true
           schema:
-            type: int
+            type: integer
       responses:
         '200':
           description: successful operation
@@ -283,8 +283,8 @@ components:
       type: object
       properties:
         nomorid:
-          type: int
-          example: 123
+          type: integer
+          example: 1
     Auth:
       type: object
       properties:
