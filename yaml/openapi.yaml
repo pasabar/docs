@@ -258,12 +258,6 @@ components:
         message:
           type: string
           example: Berhasil Input data
-    DeleteComment:
-      type: object
-      properties:
-        id:
-          type: int
-          example: 123          
     responseUser:
       type: object
       properties:
