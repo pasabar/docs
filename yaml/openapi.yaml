@@ -197,7 +197,7 @@ paths:
           description: ID of the mobile phone to delete
           required: true
           schema:
-            type: integer
+            type: int
       responses:
         '200':
           description: successful operation
