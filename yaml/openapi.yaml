@@ -1,20 +1,20 @@
 openapi: 3.0.3
 info:
-  title: Dokumen API Cloud Function PASABAR OpenAPI 3.0
+  title: Dokumen API Cloud Function - OpenAPI 3.0
   description: >-
-Dokumentasi API untuk Aplikasi Pariwisata JawaBarat (Pasabar)
+    Dokumen API Cloud Function Pasabar
   termsOfService: https://pasabar.my.id/swagger/
   contact:
     email: ryaasishlah123@gmail.com
   license:
-    name: pasabarbackend
-    url: https://pkg.go.dev/github.com/pasabar/pasabarbackend
+    name: pasabarbackend Package
+    url1: https://pkg.go.dev/github.com/pasabar/pasabarbackend
   version: 0.1.3
 externalDocs:
-  description: Repo GCF
-  url: https://pkg.go.dev/github.com/pasabar/pasabarbackend
+  description: Repo backend
+  url: http://pasabar.my.id/pasabarbackend/
 servers:
-  - url: https://asia-southeast2-pasabar.cloudfunctions.net
+  - url: https://asia-southeast2-hppinjam.cloudfunctions.net
 tags:
   - name: admin
     description: Create Account Admin
