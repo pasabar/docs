@@ -1,91 +1,34 @@
 openapi: 3.0.3
 info:
-  title: Dokumen API Cloud Function - OpenAPI 3.0
+  title: DOKUMEN API Pasabar - OpenAPI 3.0
   description: >-
-    Dokumen API Cloud Function Pasabar
+    Dokumentasi API untuk Aplikasi Pariwisata JawaBarat (Pasabar)
   termsOfService: https://pasabar.my.id/swagger/
   contact:
-    email: ryaasishlah123@gmail.com
+    email: ryaasishlah@gmail.com
   license:
-    name: pasabarbackend Package
-    url1: https://pkg.go.dev/github.com/pasabar/pasabarbackend
+    name: Pasabar Backend
+    url: https://pkg.go.dev/github.com/pasabar/pasabarbackend
   version: 0.1.3
 externalDocs:
-  description: Repo backend
-  url: http://pasabar.my.id/pasabarbackend/
+  description: Repo GCF
+  url: https://pkg.go.dev/github.com/pasabar/pasabarbackend
 servers:
   - url: https://asia-southeast2-pasabar.cloudfunctions.net
 tags:
-  - name: auth
-    description: Authentikasi
-    externalDocs:
-      description: Deskripsi dan Kode Program
-      url: http://pasabar.my.id/pasabarbackend/
-  # - name: register
-  #   description: Register Account
-  #   externalDocs:
-  #     description: Deskripsi dan Kode Program
-  #     url: http://pasabar.my.id/pasabarbackend/
-  - name: Catalog
-    description: Catalog Operations
-    externalDocs:
-      description: Deskripsi dan Kode Program
-      url: http://pasabar.my.id/pasabarbackend/
 paths:
-  # /registeruser:
-  #   post:
-  #     tags:
-  #       - register
-  #     summary: Register User Without Token
-  #     description: Daftar Akun User
-  #     operationId: authService
-  #     requestBody:
-  #       content:
-  #         application/json:
-  #           schema:
-  #             $ref: '#/components/schemas/user'
-  #     responses:
-  #       '200':
-  #         description: successful operation
-  #         content:
-  #           application/json:
-  #             schema:
-  #               $ref: '#/components/schemas/Response'
-  #       '405':
-  #         description: Invalid input
-  # /Login:
-  #   post:
-  #     tags:
-  #       - auth
-  #     summary: User Login to Get Token
-  #     description: User Login and Get Token
-  #     operationId: authService
-  #     requestBody:
-  #       content:
-  #         application/json:
-  #           schema:
-  #             $ref: '#/components/schemas/Auth'
-  #     responses:
-  #       '200':
-  #         description: successful operation
-  #         content:
-  #           application/json:
-  #             schema:
-  #               $ref: '#/components/schemas/AuthResponse'
-  #       '405':
-  #         description: Invalid input
   /Admin-Login:
     post:
       tags:
-        - auth
-      summary: Admin Login to Get Token
-      description: Admin Login and Get Token using Email and Password
-      operationId: adminLoginService
+        - Admin
+      summary: Login get Token
+      description: Login and Get Admin Token
+      operationId: authService
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AdminAuth'
+              $ref: '#/components/schemas/Auth'
       responses:
         '200':
           description: successful operation
@@ -95,78 +38,14 @@ paths:
                 $ref: '#/components/schemas/AuthResponse'
         '405':
           description: Invalid input
-  /Insert-Catalog:
-    post:
-      tags:
-        - Catalog
-      summary: Insert Catalog
-      description: Insert Catalog into the database
-      operationId: insertCatalogService
-      security:
-        - Login: []  # Menentukan bahwa endpoint ini membutuhkan skema keamanan 'Login'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Catalog'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
-        '401':
-          description: Unauthorized - Admin not logged in
-        '403':
-          description: Forbidden - Admin does not have permission
-        '405':
-          description: Invalid input
-  /Update-Catalog:
-    put:
-      tags:
-        - Catalog
-      summary: Update Catalog by ID
-      description: Update Catalog data in the database by ID
-      operationId: updateCatalogService
-      security:
-        - Login: []  # Menentukan bahwa endpoint ini membutuhkan skema keamanan 'Login'
-      parameters:
-        - name: nomorid
-          in: path
-          description: ID of the Catalog to update
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Catalog'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
-        '401':
-          description: Unauthorized - Admin not logged in
-        '403':
-          description: Forbidden - Admin does not have permission
-        '404':
-          description: Not Found - Catalog not found
-        '405':
-          description: Invalid input
-  /GetAll-dataCatalog:
+
+  /GetAll-Crawling:
     get:
       tags:
-        - Catalog
-      summary: Get All Catalogs
-      description: Retrieve all Catalog data from the database
-      operationId: getAllCatalogService
-      security:
-        - Login: []  # Menentukan bahwa endpoint ini membutuhkan skema keamanan 'Login'
+        - Data Grafik Admin
+      summary: Get Data Crawling
+      description: List Data Crawling
+      operationId: GetCrawling
       responses:
         '200':
           description: successful operation
@@ -175,57 +54,516 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Catalog'
-        '401':
-          description: Unauthorized - Admin not logged in
-        '403':
-          description: Forbidden - Admin does not have permission
-        '405':
-          description: Invalid input
-  /Delete-Catalog:
-    delete:
+                  $ref: '#/components/schemas/Crawling'
+        '400':
+          description: Invalid status value
+
+  /GetAllWisata:
+    get:
       tags:
-        - Catalog
-      summary: Delete Catalog by ID
-      description: Delete Catalog data from the database by ID
-      operationId: deleteCatalogService
+        - Data Grafik Admin
+      summary: Get Data wisata
+      description: List Data wisata
+      operationId: Getwisata
+      responses:
+        '200':
+          description: successful operation wisata
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateCatalog'
+        '400':
+          description: Invalid status value
       security:
-        - Login: []  # Menentukan bahwa endpoint ini membutuhkan skema keamanan 'Login'
-      parameters:
-        - name: nomorid
-          in: path
-          description: ID of the Catalog to delete
-          required: true
-          schema:
-            type: integer
+        - Login: []  
+
+  /GetAll-dataCatalog:
+    get:
+      tags:
+        - Data Grafik Admin
+      summary: Get Data Catalog
+      description: List Data Catalog
+      operationId: getCatalog
       responses:
         '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DeleteCatalog'
-        '401':
-          description: Unauthorized - Admin not logged in
-        '403':
-          description: Forbidden - Admin does not have permission
-        '404':
-          description: Not Found - Catalog not found
-        '405':
-          description: Invalid input
+                items:
+                  $ref: '#/components/schemas/CreateCatalog'
+        '400':
+          description: Invalid status value
+      security:
+        - Login: []  
+
+  /GetAll-Restoran:
+    get:
+      tags:
+        - Data Grafik Admin
+      summary: Get Data Restoran
+      description: List Data Restoran
+      operationId: getRestoran
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateCatalog'
+        '400':
+          description: Invalid status value
+      security:
+        - Login: []
+
+  /GetAll-About:
+    get:
+      tags:
+        - Data Grafik Admin
+      summary: Get About 
+      description: List About 
+      operationId: Event About
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/about'
+        '400':
+          description: Invalid status value
+      security:
+        - Login: []
+
+  /GetAll-Hotel:
+    get:
+      tags:
+        - Data Grafik Admin
+      summary: Get Hotel 
+      description: List Hotel 
+      operationId: Event Hotel
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateCatalog'
+        '400':
+          description: Invalid status value
+      security:
+        - Login: []
+
+  /Insert-Catalog:
+    post:
+      tags:
+        - Catalog
+      summary: Create Catalog Data
+      description: Add new Catalog data
+      operationId: create Catalog
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCatalog' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CreateCatalog'
+        '400':
+          description: Invalid input or request body
+      security:
+        - Login: []
+
+  /Delete-Catalog:
+    delete:
+      tags:
+        - Catalog
+      summary: delete Catalog Data berdasarkan nomor id
+      description: delete Catalog data
+      operationId: delete Catalog
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteCatalog' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CreateCatalog'
+        '400':
+          description: Invalid input or request body
+      security:
+        - Login: []
+
+  /Update-Catalog:
+    put:
+      tags:
+        - Catalog
+      summary: Updated Catalog Data berdasarkan nomor id
+      description: Updated Catalog data
+      operationId: Updated Catalog
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/catalog' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CreateCatalog'
+        '400':
+          description: Invalid input or request body
+      security:
+        - Login: []
+        
+
+
+  /InsertWisata:
+    post:
+      tags:
+        - Wisata
+      summary: Create Wisata Data
+      description: Create Wisata data
+      operationId: Create Wisata
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWisata' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateWisata'
+        '400':
+          description: Invalid input or request body
+      security:
+        - Login: []
+
+  /DeleteWisata:
+    delete:
+      tags:
+        - Wisata
+      summary: delete Wisata Data berdasarkan nomor id
+      description: delete Wisata data
+      operationId: delete Wisata
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteWisata' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateWisata'
+        '400':
+          description: Invalid input or request body
+      security:
+        - Login: []
+
+  /UpdateWisata:
+    put:
+      tags:
+        - Wisata
+      summary: Update Wisata Data berdasarkan nomor id
+      description: Update Wisata data
+      operationId: Update Wisata
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/wisata' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateWisata'
+        '400':
+          description: Invalid input or request body
+      security:
+        - Login: []
+
+  /Insert-Hotel:
+    post:
+      tags:
+        - Hotel
+      summary: Create Hotel Data
+      description: Create Hotel data
+      operationId: Create Hotel
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateHotel' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateHotel'
+        '400':
+          description: Invalid input or request body
+      security:
+        - Login: []
+
+  /Delete-Hotel:
+    delete:
+      tags:
+        - Hotel
+      summary: delete Hotel Data berdasarkan nomor id
+      description: delete Hotel data
+      operationId: delete Hotel
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/hoteldelete' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateHotel'
+        '400':
+          description: Invalid input or request body
+      security:
+        - Login: []
+
+  /Update-Hotel:
+    put:
+      tags:
+        - Hotel
+      summary: Update Hotel Data berdasarkan nomor id
+      description: Update Hotel data
+      operationId: Update Hotel
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/hotel' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateHotel'
+        '400':
+          description: Invalid input or request body
+      security:
+        - Login: []
+      
+  /InsertRestoran:
+    post:
+      tags:
+        - Restoran
+      summary: Create Restoran Data
+      description: Create Restoran data
+      operationId: Create Restoran
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/restoran' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateRestoran'
+        '400':
+          description: Invalid input or request body
+      security:
+        - Login: []
+
+  /Delete-Restoran:
+    delete:
+      tags:
+        - Restoran
+      summary: delete Restoran Data berdasarkan nomor id
+      description: delete Restoran data
+      operationId: delete Restoran
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/restorandelete' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateRestoran'
+        '400':
+          description: Invalid input or request body
+      security:
+        - Login: []
+
+  /Update-Restoran:
+    put:
+      tags:
+        - Restoran
+      summary: Update Restoran Data berdasarkan nomor id
+      description: Update Restoran data
+      operationId: Update Restoran
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/restoran' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRestoran'
+        '400':
+          description: Invalid input or request body
+      security:
+        - Login: []
+
+  /Insert-About:
+    post:
+      tags:
+        - About
+      summary: Create About Data
+      description: Create About data
+      operationId: Create About
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/about' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateAbout'
+        '400':
+          description: Invalid input or request body
+      security:
+        - Login: []
+
+  /Delete-About:
+    delete:
+      tags:
+        - About
+      summary: delete About Data berdasarkan nomor id
+      description: delete About data
+      operationId: delete About
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/aboutdelete' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateAbout'
+        '400':
+          description: Invalid input or request body
+      security:
+        - Login: []
+
+  /Update-About:
+    put:
+      tags:
+        - About
+      summary: Update About Data berdasarkan nomor id
+      description: Update About data
+      operationId: Update About
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/about' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAbout'
+        '400':
+          description: Invalid input or request body
+      security:
+        - Login: []
 
 components:
   schemas:
-    # user:
-    #   type: object
-    #   properties:
-    #     username:
-    #       type: string
-    #       example: farhan
-    #     password:
-    #       type: string
-    #       example: akurijik
-    AdminAuth:
+
+    Auth:
       type: object
       properties:
         email:
@@ -234,66 +572,7 @@ components:
         password:
           type: string
           example: hebat
-    Catalog:
-      type: object
-      properties:
-        nomorid:
-          type: integer
-          example: 1
-        title:
-          type: string
-          example: cipanas nagreg
-        description:
-          type: string
-          example: panas sekali
-        image:
-          type: string
-          format: binary
-    Response:
-      type: object
-      properties:
-        status:
-          type: bool
-          example: true
-        message:
-          type: string
-          example: Berhasil Input data
-    responseUser:
-      type: object
-      properties:
-        status:
-          type: bool
-          example: true
-        message:
-          type: string
-          example: berhasil ambil data
-        data:
-          type: object
-          properties:
-            username:
-              type: string
-              example: farhan
-            password:
-              type: string
-              example: hashed password
-            role:
-              type: string
-              example: user
-    DeleteCatalog:
-      type: object
-      properties:
-        nomorid:
-          type: integer
-          example: 1
-    Auth:
-      type: object
-      properties:
-        username:
-          type: string
-          example: ryaas
-        password:
-          type: string
-          example: akuishlah
+
     AuthResponse:
       type: object
       properties:
@@ -302,31 +581,286 @@ components:
           example: false
         message:
           type: string
-          example: Selamat Datang
+          example: Selamat Datang Admin
         token:
           type: string
-          example: aku admin
-  requestBodies:
+          example: alagaday
+
+    Crawling:
+      type: object
+      properties:
+        created_at:
+          type: string
+          example: kemarin
+        full_text:
+          type: string
+          example: ajak gua dong ke gunung ciremai
+        username:
+          type: string
+          example: akuganteng
+        location:
+          type: string
+          example: garuts
+
+    CreateCatalog:
+      type: object
+      properties:
+        Nomorid:
+          type: int
+          example: 1
+        Title:
+          type: string
+          example: gunung nya
+        Description:
+          type: string
+          example: sangat indah
+        lokasi:
+          type: string
+          example: garut
+        Image:
+          type: string
+          example: aku laper
+        Status:
+          type: bool
+          example: true
+
+    DeleteCatalog:
+      type: object
+      properties:
+        nomorid:
+          type: int
+          example: 1
+
+    CreateWisata:
+      type: object
+      properties:
+        Nomorid:
+          type: int
+          example: 1
+        Title:
+          type: string
+          example: Kebun Binatang
+        Description:
+          type: string
+          example: Banyak Binatang nya
+        lokasi:
+          type: string
+          example: Bandung
+        Image:
+          type: string
+          example: poto singa
+        Status:
+          type: bool
+          example: true
+
+    DeleteWisata:
+      type: object
+      properties:
+        nomorid:
+          type: int
+          example: 1
+
+    CreateRestoran:
+      type: object
+      properties:
+        Nomorid:
+          type: int
+          example: 1
+        Title:
+          type: string
+          example: Lalaban
+        Description:
+          type: string
+          example: makananya enak
+        lokasi:
+          type: string
+          example: sarijadi
+        Image:
+          type: string
+          example: aku laper
+        Status:
+          type: bool
+          example: true
+
+    restorandelete:
+      type: object
+      properties:
+        nomorid:
+          type: int
+          example: 1
+
+    CreateHotel:
+      type: object
+      properties:
+        Nomorid:
+          type: int
+          example: 1
+        Title:
+          type: string
+          example: Novotel
+        Description:
+          type: string
+          example: Hotel Bintang 5
+        lokasi:
+          type: string
+          example: Bandung
+        Image:
+          type: string
+          example: poto hotel
+        Status:
+          type: bool
+          example: true
+
+    hoteldelete:
+      type: object
+      properties:
+        nomorid:
+          type: int
+          example: 1
+
+    CreateAbout:
+      type: object
+      properties:
+        Nomorid:
+          type: int
+          example: 1
+        Title:
+          type: string
+          example: Kami Ganteng
+        Description:
+          type: string
+          example: Disini kita keren dan ganteng banget
+        Image:
+          type: string
+          example: poto hotel
+        Status:
+          type: bool
+          example: true
+
+    aboutdelete:
+      type: object
+      properties:
+        nomorid:
+          type: int
+          example: 1
+
+    catalog:
+      type: object
+      properties:
+        Nomorid:
+          type: int
+          example: 1
+        Title:
+          type: string
+          example: pantai santolo
+        Description:
+          type: string
+          example: bersih sekali
+        Lokasi:
+          type: string
+          example: garut
+        Image:
+          type: string
+          example: kasep
+        Status:
+          type: bool
+          example: true
+
+    wisata:
+      type: object
+      properties:
+        Nomorid:
+          type: int
+          example: 1
+        Title:
+          type: string
+          example: kebun binatang
+        Description:
+          type: string
+          example: ada binatangnya lohh
+        Lokasi:
+          type: string
+          example: bandung
+        Image:
+          type: string
+          example: poto kasepmu
+        Status:
+          type: bool
+          example: true
+
+    hotel:
+      type: object
+      properties:
+        Nomorid:
+          type: int
+          example: 1
+        Title:
+          type: string
+          example: Grandia
+        Description:
+          type: string
+          example: ada kolam renang diatasnya
+        Lokasi:
+          type: string
+          example: bandung
+        Image:
+          type: string
+          example: poto kasepmu
+        Status:
+          type: bool
+          example: true
+
+    restoran:
+      type: object
+      properties:
+        Nomorid:
+          type: int
+          example: 1
+        Title:
+          type: string
+          example: Ampera
+        Description:
+          type: string
+          example: Enak sekali
+        Lokasi:
+          type: string
+          example: bandung
+        Image:
+          type: string
+          example: potomakananmu
+        Status:
+          type: bool
+          example: true
+
+
+    about:
+      type: object
+      properties:
+        id:
+          type: int
+          example: 1
+        Title:
+          type: string
+          example: fahad dan ryaas
+        Description:
+          type: string
+          example: sangat keren sekali
+        Status:
+          type: bool
+          example: true
+
+
+
+
     AuthReq:
       description: Request Authentication
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Auth'
-    AdminAuthReq:
-      description: Request Admin Authentication
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AdminAuth'
-    CatalogReq:
-      description: Request Catalog Insertion
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Catalog'
-    UserArray:
-      description: List of user object
+
+    AdminArray:
+      description: List of admin object
       content:
         application/json:
           schema:
