@@ -39,6 +39,28 @@ paths:
         '405':
           description: Invalid input
 
+  /Login-WA:
+    post:
+      tags:
+        - Admin Integrasi Whatsauth
+      summary: Login get Token
+      description: Login and Get Admin Token
+      operationId: authService
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthWA'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponseWA'
+        '405':
+          description: Invalid input          
+
   /GetAll-Crawling:
     get:
       tags:
@@ -73,7 +95,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/CreateCatalog'
+                  $ref: '#/components/schemas/GetidWisata'
         '400':
           description: Invalid status value
       security:
@@ -162,6 +184,132 @@ paths:
       security:
         - Login: []
 
+
+  /GetOneCatalog:
+    get:
+      tags:
+        - Get by ID
+      summary: Get One Data Catalog
+      description: List One Data Catalog
+      operationId: getCatalogById
+      parameters:
+        - name: _id
+          in: query
+          schema:
+            type: string
+          description: ID of Catalog
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetidCatalog'
+        '400':
+          description: Invalid status value
+
+  /GetOneWisata:
+    get:
+      tags:
+        - Get by ID
+      summary: Get One Data Wisata
+      description: List One Data Wisata
+      operationId: getWisataById
+      parameters:
+        - name: _id
+          in: query
+          schema:
+            type: string
+          description: ID of Wisata
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetidWisata'
+        '400':
+          description: Invalid status value
+
+  /GetOneHotel:
+    get:
+      tags:
+        - Get by ID
+      summary: Get One Data Hotel
+      description: List One Data Hotel
+      operationId: getHotelById
+      parameters:
+        - name: _id
+          in: query
+          schema:
+            type: string
+          description: ID of Hotel
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetidHotel'
+        '400':
+          description: Invalid status value
+
+  /GetOneRestoran:
+    get:
+      tags:
+        - Get by ID
+      summary: Get One Data Restoran
+      description: List One Data Restoran
+      operationId: getRestoranById
+      parameters:
+        - name: _id
+          in: query
+          schema:
+            type: string
+          description: ID of Restoran
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetidRestoran'
+        '400':
+          description: Invalid status value
+
+  /GetOneKesimpulan:
+    get:
+      tags:
+        - Get by ID
+      summary: Get One Data Kesimpulan
+      description: List One Data Kesimpulan
+      operationId: getKesimpulanById
+      parameters:
+        - name: _id
+          in: query
+          schema:
+            type: string
+          description: ID of Kesimpulan
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetidKesimpulan'
+        '400':
+          description: Invalid status value
+
   /Insert-Catalog:
     post:
       tags:
@@ -169,6 +317,33 @@ paths:
       summary: Create Catalog Data
       description: Add new Catalog data
       operationId: create Catalog
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCatalog' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CreateCatalog'
+        '400':
+          description: Invalid input or request body
+      security:
+        - Login: []
+
+
+  /Update-Catalog:
+    put:
+      tags:
+        - Catalog
+      summary: Updated Catalog Data berdasarkan nomor id
+      description: Updated Catalog data
+      operationId: Updated Catalog
       requestBody:
         required: true
         content:
@@ -214,31 +389,7 @@ paths:
       security:
         - Login: []
 
-  /Update-Catalog:
-    put:
-      tags:
-        - Catalog
-      summary: Updated Catalog Data berdasarkan nomor id
-      description: Updated Catalog data
-      operationId: Updated Catalog
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/catalog' # Gunakan skema yang sesuai di sini
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/CreateCatalog'
-        '400':
-          description: Invalid input or request body
-      security:
-        - Login: []
+
         
 
 
@@ -249,6 +400,33 @@ paths:
       summary: Create Wisata Data
       description: Create Wisata data
       operationId: Create Wisata
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWisata' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateWisata'
+        '400':
+          description: Invalid input or request body
+      security:
+        - Login: []
+
+  /UpdateWisata:
+    put:
+      tags:
+        - Wisata
+      summary: Update Wisata Data berdasarkan nomor id
+      description: Update Wisata data
+      operationId: Update Wisata
       requestBody:
         required: true
         content:
@@ -296,32 +474,7 @@ paths:
       security:
         - Login: []
 
-  /UpdateWisata:
-    put:
-      tags:
-        - Wisata
-      summary: Update Wisata Data berdasarkan nomor id
-      description: Update Wisata data
-      operationId: Update Wisata
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/wisata' # Gunakan skema yang sesuai di sini
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/CreateWisata'
-        '400':
-          description: Invalid input or request body
-      security:
-        - Login: []
+
 
   /Insert-Hotel:
     post:
@@ -345,6 +498,32 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/CreateHotel'
+        '400':
+          description: Invalid input or request body
+      security:
+        - Login: []
+
+
+  /Update-Hotel:
+    put:
+      tags:
+        - Hotel
+      summary: Update Hotel Data berdasarkan nomor id
+      description: Update Hotel data
+      operationId: Update Hotel
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/hotel' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateHotel'
         '400':
           description: Invalid input or request body
       security:
@@ -377,30 +556,7 @@ paths:
       security:
         - Login: []
 
-  /Update-Hotel:
-    put:
-      tags:
-        - Hotel
-      summary: Update Hotel Data berdasarkan nomor id
-      description: Update Hotel data
-      operationId: Update Hotel
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/hotel' # Gunakan skema yang sesuai di sini
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateHotel'
-        '400':
-          description: Invalid input or request body
-      security:
-        - Login: []
+
       
   /InsertRestoran:
     post:
@@ -414,7 +570,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/restoran' # Gunakan skema yang sesuai di sini
+              $ref: '#/components/schemas/CreateRestoran' # Gunakan skema yang sesuai di sini
       responses:
         '200':
           description: successful operation
@@ -424,6 +580,32 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/CreateRestoran'
+        '400':
+          description: Invalid input or request body
+      security:
+        - Login: []
+
+
+  /Update-Restoran:
+    put:
+      tags:
+        - Restoran
+      summary: Update Restoran Data berdasarkan nomor id
+      description: Update Restoran data
+      operationId: Update Restoran
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/restoran' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRestoran'
         '400':
           description: Invalid input or request body
       security:
@@ -456,30 +638,7 @@ paths:
       security:
         - Login: []
 
-  /Update-Restoran:
-    put:
-      tags:
-        - Restoran
-      summary: Update Restoran Data berdasarkan nomor id
-      description: Update Restoran data
-      operationId: Update Restoran
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/restoran' # Gunakan skema yang sesuai di sini
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateRestoran'
-        '400':
-          description: Invalid input or request body
-      security:
-        - Login: []
+
 
   /Insert-About:
     post:
@@ -503,6 +662,32 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/CreateAbout'
+        '400':
+          description: Invalid input or request body
+      security:
+        - Login: []
+
+
+  /Update-About:
+    put:
+      tags:
+        - About
+      summary: Update About Data berdasarkan nomor id
+      description: Update About data
+      operationId: Update About
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAbout' # Gunakan skema yang sesuai di sini
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAbout'
         '400':
           description: Invalid input or request body
       security:
@@ -535,30 +720,7 @@ paths:
       security:
         - Login: []
 
-  /Update-About:
-    put:
-      tags:
-        - About
-      summary: Update About Data berdasarkan nomor id
-      description: Update About data
-      operationId: Update About
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/about' # Gunakan skema yang sesuai di sini
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateAbout'
-        '400':
-          description: Invalid input or request body
-      security:
-        - Login: []
+
 
 components:
   schemas:
@@ -573,6 +735,19 @@ components:
           type: string
           example: hebat
 
+    AuthWA:
+      type: object
+      properties:
+        email:
+          type: string
+          example: pasabar@gmail.com
+        password:
+          type: string
+          example: hebat 
+        no_whatsapp:
+          type: string
+          example: 6282126665837                    
+
     AuthResponse:
       type: object
       properties:
@@ -586,31 +761,45 @@ components:
           type: string
           example: alagaday
 
+
+    AuthResponseWA:
+      type: object
+      properties:
+        status:
+          type: bool
+          example: false
+        message:
+          type: string
+          example: Selamat datang Admin PASABAR anda berhasil Login, anda masuk menggunakan akun pasabar@gmail.com Selamat menggunakanya ya
+        token:
+          type: string
+          example: alagaday          
+
     Crawling:
       type: object
       properties:
         created_at:
           type: string
-          example: kemarin
+          example: Mon Nov 27 04:31:10 +0000 2023 
         full_text:
           type: string
-          example: ajak gua dong ke gunung ciremai
+          example: Baru sadar jalan-jalan pake motor ternyata udh ngelilingin gunung ciremai 👀👀👀
         username:
           type: string
-          example: akuganteng
+          example: Yogigalau01
         location:
           type: string
-          example: garuts
+          example: Cirebon Barat, Indonesia
 
     CreateCatalog:
       type: object
       properties:
         Nomorid:
           type: int
-          example: 1
+          example: 13
         Title:
           type: string
-          example: gunung nya
+          example: gunung papandayan
         Description:
           type: string
           example: sangat indah
@@ -619,7 +808,140 @@ components:
           example: garut
         Image:
           type: string
-          example: aku laper
+          example: ini foto
+        Status:
+          type: bool
+          example: true
+
+
+    GetidCatalog:
+      type: object
+      properties:
+        _id:
+          type: int
+          example: 65ae5117bc74de01d4840317
+        Nomorid:
+          type: int
+          example: 1
+        Title:
+          type: string
+          example: Pantai Pangandaran
+        Description:
+          type: string
+          example: pantai yang indah untuk belibur dan bersantai, dan pantai yang sering di kunjungi oleh wisatawan untuk berlibur
+        lokasi:
+          type: string
+          example: garut
+        Image:
+          type: string
+          example: https://raw.githubusercontent.com/pasabar/foto/main/assets/image/Pantai-di-pangandaran.jpg
+        Status:
+          type: bool
+          example: true
+
+    GetidWisata:
+      type: object
+      properties:
+        _id:
+          type: int
+          example: 65bac5ff85aaccf0674865eb
+        Nomorid:
+          type: int
+          example: 1
+        Title:
+          type: string
+          example: Masjid Kubah Emas Kota Depok
+        Description:
+          type: string
+          example: Tempat ibadah umat Islam ini, menjadi salah satu ikon wisata yang indah dan banyak dikunjungi di Kota Depok. Masjid ini mampu menampung sekitar kurang lebih 20.000 jamaah dengan luas 8.000 meter persegi. Kawasan sekitar masjid seringkali disebut sebagai kawasan masjid termegah di Asia Tenggara.
+        lokasi:
+          type: string
+          example: Terletak di Jl. Raya Meruyung, Meruyung, Kec. Limo, Kota Depok, Jawa Barat.
+        Image:
+          type: string
+          example: https://akcdn.detik.net.id/community/media/visual/2022/07/13/wisata-di-jawa-barat-9.jpeg?w=2560
+        Status:
+          type: bool
+          example: true
+
+    GetidRestoran:
+      type: object
+      properties:
+        _id:
+          type: int
+          example: 65bacc0ba39f1713c586d1b0
+        Nomorid:
+          type: int
+          example: 1
+        Title:
+          type: string
+          example: BBQ Mountain Boys Burger
+        Description:
+          type: string
+          example: Burger BBQ Mountain Boys adalah paduan sempurna dari patty daging sapi panggang dengan teknik barbecue, dilengkapi keju cheddar meleleh, selada segar, tomat, dan bawang bombay panggang. Diberi saus BBQ khas yang harmonis, burger ini memukau dengan cita rasa bergizi dan menggugah selera, memberikan pengalaman kuliner ala pegunungan yang autentik.
+        lokasi:
+          type: string
+          example: Paskal Hyper Square, The Tripark, Kecamatan, Kec. Andir, Kota Bandung, Jawa Barat
+        Image:
+          type: string
+          example: https://radarbanyumas.disway.id/upload/8447c5782aeee218d44326681bc4c7bc.jpg
+        Status:
+          type: bool
+          example: true
+
+    GetidHotel:
+      type: object
+      properties:
+        _id:
+          type: int
+          example: 65baced1054720e8dd6f23ae
+        Nomorid:
+          type: int
+          example: 1
+        Title:
+          type: string
+          example: Hilton Hotel Bandung
+        Description:
+          type: string
+          example: Hotel ini merupakan hotel bintang lima yang menawarkan pemandangan Gunung Tangkuban Perahu. Lokasi hotel ini sangat strategis, berjarak hanya 2 km dari Bandara Internasional Bandung dan 1 km dari 23 Paskal Shopping Center serta stasiun kereta api utama kota. Hotel yang dikenal dengan sebutan ‘’city resort’’ ini dilengkapi dengan fasilitas kolam renang di puncak gedung dan spa dengan perawatan bergaya Bali.
+        lokasi:
+          type: string
+          example: Jl. HOS Tjokroaminoto No.41-43, Arjuna, Kec. Cicendo, Kota Bandung, Jawa Barat
+        Image:
+          type: string
+          example: https://images.tokopedia.net/blog-tokopedia-com/uploads/2020/11/Hilton-Hotel-Bandung.jpg
+        Status:
+          type: bool
+          example: true
+
+
+    GetidKesimpulan:
+      type: object
+      properties:
+        _id:
+          type: int
+          example: 65bad26123c57b6441434f53
+        Nomorid:
+          type: int
+          example: 1
+        Ticket:
+          type: string
+          example: Gratis
+        Parkir:
+          type: string
+          example: 10.000 rupiah per kendaraan, 2.000 rupiah bagi kendaraan yang keluar
+        Jarak:
+          type: string
+          example: 2 jam 30 menit, 164km dari bandung (sarijadi) 
+        Pemandangan:
+          type: string
+          example: Pemandangan di sekitar Masjid Kubah Emas mencakup desain kubah emas yang mencolok, dengan paduan warna putih dan emas yang menciptakan suasana yang elegan. Halaman masjid yang luas memberikan tempat yang nyaman untuk berjalan-jalan atau duduk bersantai. Keteduhan pepohonan dan desain taman yang indah juga dapat menjadi daya tarik tersendiri.
+        kelebihan:
+          type: string
+          example: Arsitektur dan Desain Masjid Kubah Emas dikenal dengan arsitektur megah dan desain yang indah, yang dapat menjadi daya tarik bagi para pengunjung.
+        kekurangan:
+          type: string
+          example: Kepadatan Lalu Lintas atau Parkir Masjid yang populer mungkin menghadapi masalah kepadatan lalu lintas atau parkir, terutama selama waktu-waktu ibadah padat.          
         Status:
           type: bool
           example: true
@@ -629,14 +951,14 @@ components:
       properties:
         nomorid:
           type: int
-          example: 1
+          example: 13
 
     CreateWisata:
       type: object
       properties:
         Nomorid:
           type: int
-          example: 1
+          example: 33
         Title:
           type: string
           example: Kebun Binatang
@@ -658,14 +980,14 @@ components:
       properties:
         nomorid:
           type: int
-          example: 1
+          example: 33
 
     CreateRestoran:
       type: object
       properties:
         Nomorid:
           type: int
-          example: 1
+          example: 55
         Title:
           type: string
           example: Lalaban
@@ -687,14 +1009,14 @@ components:
       properties:
         nomorid:
           type: int
-          example: 1
+          example: 55
 
     CreateHotel:
       type: object
       properties:
         Nomorid:
           type: int
-          example: 1
+          example: 44
         Title:
           type: string
           example: Novotel
@@ -716,23 +1038,23 @@ components:
       properties:
         nomorid:
           type: int
-          example: 1
+          example: 44
 
     CreateAbout:
       type: object
       properties:
-        Nomorid:
+        id:
           type: int
           example: 1
         Title:
           type: string
-          example: Kami Ganteng
+          example: aku ryaas dan dia fahad
         Description:
           type: string
-          example: Disini kita keren dan ganteng banget
+          example: Kita melakukan pengerjaan proyek
         Image:
           type: string
-          example: poto hotel
+          example: poto kita
         Status:
           type: bool
           example: true
@@ -740,9 +1062,9 @@ components:
     aboutdelete:
       type: object
       properties:
-        nomorid:
+        _id:
           type: int
-          example: 1
+          example: 65baebf1e0337082d41e319f
 
     catalog:
       type: object
@@ -793,19 +1115,19 @@ components:
       properties:
         Nomorid:
           type: int
-          example: 1
+          example: 44
         Title:
           type: string
           example: Grandia
         Description:
           type: string
-          example: ada kolam renang diatasnya
+          example: hotel grandia bandung
         Lokasi:
           type: string
           example: bandung
         Image:
           type: string
-          example: poto kasepmu
+          example: poto hotel grandia
         Status:
           type: bool
           example: true
@@ -815,19 +1137,19 @@ components:
       properties:
         Nomorid:
           type: int
-          example: 1
+          example: 55
         Title:
           type: string
-          example: Ampera
+          example: Geprek Bajak
         Description:
           type: string
-          example: Enak sekali
+          example: Harga yang terjangkau untuk mahasiswa
         Lokasi:
           type: string
           example: bandung
         Image:
           type: string
-          example: potomakananmu
+          example: poto ayam geprek
         Status:
           type: bool
           example: true
@@ -845,6 +1167,9 @@ components:
         Description:
           type: string
           example: sangat keren sekali
+        Image:
+          type: string
+          example: poto kita berdua     
         Status:
           type: bool
           example: true
